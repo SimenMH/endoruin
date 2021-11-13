@@ -76,7 +76,7 @@ func render_level(level):
 	
 	# Create Doors
 	for tile in level.level.get_used_cells_by_id(level.CellType.DOOR):
-		tilemap.set_cellv(tile, 4)
+#		tilemap.set_cellv(tile, 4)
 		var new_door = door.instance()
 		new_door.position = gridmap.map_to_world(tile) + gridmap.cell_size / 2
 		gridmap.add_child(new_door)

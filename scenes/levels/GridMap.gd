@@ -54,6 +54,5 @@ func enemy_action(pawn, direction, cell_type, cell_target):
 func clear_cell(cell_position):
 	set_cellv(world_to_map(cell_position), -1)
 
-
 func next_turn():
 	get_tree().call_group('end_turn', '_on_end_turn')
