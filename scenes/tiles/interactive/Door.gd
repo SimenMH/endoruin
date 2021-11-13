@@ -1,6 +1,11 @@
 extends Pawn
 
+onready var grid = get_parent()
+
+enum Status { CLOSED, OPEN }
+
+
 func on_interact():
-#	if randf() > 0.5:
-	get_parent().clear_cell(global_position)
-	queue_free()
+	grid.clear_cell(global_position)
+	$Sprite.frame = Status.OPEN
+	$CollisionShape2D.disabled = true
