@@ -10,6 +10,7 @@ onready var gridmap = $Navigation2D/GridMap
 var player = preload('res://scenes/player/Player.tscn')
 var enemy = preload('res://scenes/enemy/Enemy.tscn')
 var door = preload('res://scenes/tiles/interactive/Door.tscn')
+var exit = preload('res://scenes/tiles/interactive/Exit.tscn')
 var dungeon_wall = preload('res://scenes/tiles/terrain/DungeonWall.tscn')
 var dungeon_floor = preload('res://scenes/tiles/terrain/DungeonFloor.tscn')
 var room_wall = preload('res://scenes/tiles/terrain/RoomWall.tscn')
@@ -76,7 +77,6 @@ func render_level(level):
 	
 	# Create Doors
 	for tile in level.level.get_used_cells_by_id(level.CellType.DOOR):
-#		tilemap.set_cellv(tile, 4)
 		var new_door = door.instance()
 		new_door.position = gridmap.map_to_world(tile) + gridmap.cell_size / 2
 		gridmap.add_child(new_door)
@@ -91,10 +91,12 @@ func render_level(level):
 		gridmap.set_cellv(tile, CellType.ENEMY)
 	
 	# Spawn Exit
-#	var exit = level.spawns.get_used_cells_by_id(level.CellType.EXIT)[0]
-#	tilemap.set_cellv(exit, 6)
-#	gridmap.set_cellv(exit, -1)
-	
+	var exit_pos = level.spawns.get_used_cells_by_id(level.CellType.EXIT)[0]
+	var new_exit = exit.instance()
+	new_exit.position = gridmap.map_to_world(exit_pos) + gridmap.cell_size / 2
+	tilemap.add_child(new_exit)
+	tilemap.set_cellv(exit_pos, 11)
+
 	get_tree().call_group('enemy', 'update_player', new_player)
 	get_tree().call_group('end_turn', '_on_end_turn')
 

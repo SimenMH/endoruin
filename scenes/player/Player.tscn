@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/Player.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5, 5 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -63,3 +66,13 @@ wait_time = 0.15
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Interact" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="Interact" to="." method="_on_Interact_area_entered"]
+[connection signal="area_exited" from="Interact" to="." method="_on_Interact_area_exited"]

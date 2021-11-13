@@ -6,6 +6,8 @@ var player_turn = true
 var max_health = 25
 var health = 25
 
+var interactive = null
+
 func _ready():
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(health) + '/' + str(max_health)
 
@@ -15,6 +17,9 @@ func _process(_delta):
 	if Input.is_action_pressed('wait'):
 		parent.next_turn()
 		$TurnTimer.start()
+		return
+	if interactive && Input.is_action_pressed('interact'):
+		interactive.on_interact()
 		return
 	if  !input_direction: return
 	$TurnTimer.start()
@@ -45,3 +50,11 @@ func bump(dir):
 func take_damage(value):
 	health -= value
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(health) + '/' + str(max_health)
+
+
+func _on_Interact_area_entered(area):
+	interactive = area
+
+func _on_Interact_area_exited(area):
+	if interactive == area:
+		interactive = null

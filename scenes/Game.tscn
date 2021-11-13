@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/Game.gd" type="Script" id=5]
 [ext_resource path="res://scenes/levels/LevelGenerator.tscn" type="PackedScene" id=10]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["game"]]
 script = ExtResource( 5 )
 level_generator = ExtResource( 10 )
 
