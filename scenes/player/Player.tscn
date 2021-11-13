@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=1]
+[ext_resource path="res://scenes/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://sprites/light.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Label" parent="CanvasLayer/GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 656.0
+margin_right = -1219.0
+margin_bottom = -50.0
+rect_scale = Vector2( 3, 3 )
+text = "25/25"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 432, 0, 16, 16 )
+
+[node name="Camera2D" type="Camera2D" parent="Pivot"]
+visible = false
+current = true
+zoom = Vector2( 0.15, 0.15 )
+
+[node name="Light2D" type="Light2D" parent="Pivot"]
+texture = ExtResource( 3 )
+texture_scale = 0.15
+shadow_enabled = true
+
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]

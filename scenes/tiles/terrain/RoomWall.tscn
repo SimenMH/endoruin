@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/tiles/SetTileVisibility.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Pawn.gd" type="Script" id=2]
+[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="RoomWall" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 2 )
+type = 4
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 112, 240, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="SetTileVisibility" parent="." instance=ExtResource( 1 )]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/tiles/SetTileVisibility.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/tiles/interactive/Door.gd" type="Script" id=2]
+[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Door" type="StaticBody2D"]
+position = Vector2( 184, 184 )
+collision_mask = 0
+script = ExtResource( 2 )
+type = 3
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 128, 144, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="SetTerrainVisibility" parent="." instance=ExtResource( 1 )]

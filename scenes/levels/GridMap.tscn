@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/levels/GridMap.gd" type="Script" id=1]
+[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=2]
+
+[sub_resource type="OccluderPolygon2D" id=4]
+cull_mode = 1
+polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=5]
+polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=1]
+0/name = "PLAYER"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( -16, -16, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "ENEMY"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, -16, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "NPC"
+2/texture = ExtResource( 2 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 16, -16, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "INTERACTIVE"
+3/texture = ExtResource( 2 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 32, -16, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/occluder = SubResource( 4 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 3 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+4/name = "WALL"
+4/texture = ExtResource( 2 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 48, -16, 16, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/occluder = SubResource( 5 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 2 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+4/z_index = 0
+
+[node name="GridMap" type="TileMap"]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 11, 4, 0, 12, 4, 0, 13, 4, 0, 65537, 4, 0, 65549, 4, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131079, 4, 0, 131083, 4, 0, 131085, 4, 0, 196609, 4, 0, 196619, 4, 0, 196621, 4, 0, 262145, 4, 0, 262155, 4, 0, 262157, 4, 0, 327681, 4, 0, 327685, 4, 0, 327691, 4, 0, 327693, 4, 0, 393217, 4, 0, 393221, 4, 0, 393222, 4, 0, 393227, 4, 0, 393229, 4, 0, 458753, 4, 0, 458760, 4, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458765, 4, 0, 524289, 4, 0, 524299, 4, 0, 524301, 4, 0, 589825, 4, 0, 589826, 4, 0, 589827, 4, 0, 589828, 4, 0, 589829, 4, 0, 589830, 4, 0, 589831, 4, 0, 589832, 4, 0, 589833, 4, 0, 589834, 4, 0, 589835, 4, 0, 589837, 4, 0, 655369, 4, 0, 655373, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, 4, 0, 720908, 4, 0, 720909, 4, 0, 786439, 4, 0, 786440, 4, 0, 786445, 4, 0, 786446, 4, 0, 786447, 4, 0, 851975, 4, 0, 851983, 4, 0, 851984, 4, 0, 917511, 4, 0, 917520, 4, 0, 983047, 4, 0, 983056, 4, 0, 1048583, 4, 0, 1048592, 4, 0, 1114119, 4, 0, 1114127, 4, 0, 1114128, 4, 0, 1179655, 4, 0, 1179656, 4, 0, 1179657, 4, 0, 1179658, 4, 0, 1179659, 4, 0, 1179660, 4, 0, 1179661, 4, 0, 1179662, 4, 0, 1179663, 4, 0 )
+script = ExtResource( 1 )
