@@ -56,7 +56,6 @@ func render_level(level):
 		new_wall.position = gridmap.map_to_world(tile) + gridmap.cell_size / 2
 		gridmap.add_child(new_wall)
 		gridmap.set_cellv(tile, CellType.WALL)
-#
 	for tile in level.level.get_used_cells_by_id(level.CellType.DUNGEON_WALL):
 		var new_wall = dungeon_wall.instance()
 		new_wall.position = gridmap.map_to_world(tile) + gridmap.cell_size / 2
