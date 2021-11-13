@@ -15,7 +15,7 @@ var dungeon_floor = preload('res://scenes/tiles/terrain/DungeonFloor.tscn')
 var room_wall = preload('res://scenes/tiles/terrain/RoomWall.tscn')
 var room_floor = preload('res://scenes/tiles/terrain/RoomFloor.tscn')
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed('ui_select'):
 		start_game()
 
@@ -26,7 +26,7 @@ func start_game():
 	var new_level = generator_instance.generate(16)
 	render_level(new_level)
 	
-	# Move this queue_free to bottom of render_level function
+	# TODO: Move this queue_free to bottom of render_level function
 	yield(get_tree().create_timer(0.1), "timeout")
 	generator_instance.queue_free()
 

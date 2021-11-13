@@ -50,9 +50,7 @@ func generate(size):
 	
 	create_spawn_and_exit()
 	spawn_enemies()
-
 	
-	add_level_borders()
 	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType}
 
 func generate_sections(size):
@@ -191,7 +189,6 @@ func generate_pathways():
 
 	var i = 1
 	while (i < doors.size()):
-#		yield(get_tree().create_timer(0.01), "timeout")
 		var door_pos = level_tilemap.map_to_world(doors[i]) + level_tilemap.cell_size / 2
 		var new_path = navmap.get_simple_path(walker.global_position, door_pos, false)
 		if new_path:
@@ -218,7 +215,6 @@ func generate_pathways():
 	var times_ran = 0
 	i = 0
 	while i < level.size.x:
-#		yield(get_tree().create_timer(0.0001), "timeout")
 		times_ran += 1
 		var point_pos = level_tilemap.map_to_world(new_point) + level_tilemap.cell_size / 2
 		var new_path = navmap.get_simple_path(walker.global_position, point_pos, false)
@@ -272,10 +268,3 @@ func spawn_enemies():
 	
 	for pos in enemy_locations:
 		spawn_tilemap.set_cellv(pos, CellType.ENEMY)
-
-func add_level_borders():
-	return
-	for y in range(level.end.y - level.position.y + 3):
-		for x in range(level.end.x - level.position.x + 3):
-			if y == 0 || x == 0 || y == level.size.y + 2 || x == level.size.x + 2:
-				level_tilemap.set_cell(level.position.x + x - 1, level.position.y + y - 1, CellType.DUNGEON_WALL)
