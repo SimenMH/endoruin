@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/tiles/SetTileVisibility.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Pawn.gd" type="Script" id=2]
-[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=3]
+[ext_resource path="res://sprites/tilesheets/colored_transparent_packed.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )

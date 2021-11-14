@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tilesheets/colored_transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/light.png" type="Texture" id=3]
+[ext_resource path="res://scenes/GUI/inventory/Inventory.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -26,6 +27,9 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Inventory" parent="CanvasLayer/GUI" instance=ExtResource( 4 )]
+visible = false
 
 [node name="Health" type="Label" parent="CanvasLayer/GUI"]
 anchor_right = 1.0

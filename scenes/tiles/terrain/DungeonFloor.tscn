@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/tiles/SetTileVisibility.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=2]
+[ext_resource path="res://sprites/tilesheets/colored_transparent_packed.png" type="Texture" id=2]
 
 [node name="DungeonFloor" type="Node2D"]
 

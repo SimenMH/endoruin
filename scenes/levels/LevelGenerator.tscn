@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://sprites/tilemaps/colored_transparent_packed.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tilesheets/colored_transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/levels/LevelGenerator.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 

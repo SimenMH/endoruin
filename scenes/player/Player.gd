@@ -9,13 +9,14 @@ var health = 25
 var dir_input = Vector2()
 var prev_dir = Vector2()
 
-
 var interactive = null
 
 func _ready():
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(health) + '/' + str(max_health)
 
 func _process(_delta):
+	if Input.is_action_just_pressed('open_inventory'):
+		$CanvasLayer/GUI/Inventory.visible = !$CanvasLayer/GUI/Inventory.visible
 	var input_direction = get_input_direction()
 	if !$TurnTimer.is_stopped(): return
 	if Input.is_action_pressed('wait'):

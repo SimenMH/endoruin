@@ -1,0 +1,788 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/GUI/inventory/InvSlot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/pcsenior.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+extra_spacing_space = -5
+font_data = ExtResource( 2 )
+
+[node name="Inventory" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 232.0
+margin_top = 104.0
+margin_right = 1047.0
+margin_bottom = 616.0
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_right = 207.0
+margin_bottom = 512.0
+
+[node name="EquipmentSlots" type="VBoxContainer" parent="HBoxContainer/CenterContainer"]
+margin_right = 207.0
+margin_bottom = 512.0
+custom_constants/separation = 0
+
+[node name="Head" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_right = 207.0
+margin_bottom = 64.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/Head"]
+margin_left = 75.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Head"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/Head" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="Chest" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 64.0
+margin_right = 207.0
+margin_bottom = 128.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/Chest"]
+margin_left = 59.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Chest"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/Chest" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="Feet" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 128.0
+margin_right = 207.0
+margin_bottom = 192.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/Feet"]
+margin_left = 75.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Feet"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/Feet" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="Ring1" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 192.0
+margin_right = 207.0
+margin_bottom = 256.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/Ring1"]
+margin_left = 48.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Ring 1"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/Ring1" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="Ring2" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 256.0
+margin_right = 207.0
+margin_bottom = 320.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/Ring2"]
+margin_left = 48.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Ring 2"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/Ring2" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="Neck" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 320.0
+margin_right = 207.0
+margin_bottom = 384.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/Neck"]
+margin_left = 75.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Neck"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/Neck" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="MHand" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 384.0
+margin_right = 207.0
+margin_bottom = 448.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/MHand"]
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Main Hand"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/MHand" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="OHand" type="HBoxContainer" parent="HBoxContainer/CenterContainer/EquipmentSlots"]
+margin_top = 448.0
+margin_right = 207.0
+margin_bottom = 512.0
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/EquipmentSlots/OHand"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 3 )
+text = "Off Hand"
+valign = 1
+
+[node name="InvSlot" parent="HBoxContainer/CenterContainer/EquipmentSlots/OHand" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 207.0
+margin_bottom = 64.0
+
+[node name="InventorySlots" type="GridContainer" parent="HBoxContainer"]
+margin_left = 239.0
+margin_right = 815.0
+margin_bottom = 512.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 9
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InvSlot" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="InvSlot2" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_right = 128.0
+margin_bottom = 64.0
+
+[node name="InvSlot3" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_right = 192.0
+margin_bottom = 64.0
+
+[node name="InvSlot4" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_right = 256.0
+margin_bottom = 64.0
+
+[node name="InvSlot5" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 64.0
+
+[node name="InvSlot6" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_right = 384.0
+margin_bottom = 64.0
+
+[node name="InvSlot7" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_right = 448.0
+margin_bottom = 64.0
+
+[node name="InvSlot8" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_right = 512.0
+margin_bottom = 64.0
+
+[node name="InvSlot9" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_right = 576.0
+margin_bottom = 64.0
+
+[node name="InvSlot10" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 128.0
+
+[node name="InvSlot11" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="InvSlot12" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 128.0
+
+[node name="InvSlot13" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 256.0
+margin_bottom = 128.0
+
+[node name="InvSlot14" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 128.0
+
+[node name="InvSlot15" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 128.0
+
+[node name="InvSlot16" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 64.0
+margin_right = 448.0
+margin_bottom = 128.0
+
+[node name="InvSlot17" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 64.0
+margin_right = 512.0
+margin_bottom = 128.0
+
+[node name="InvSlot18" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 64.0
+margin_right = 576.0
+margin_bottom = 128.0
+
+[node name="InvSlot19" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 128.0
+margin_right = 64.0
+margin_bottom = 192.0
+
+[node name="InvSlot20" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 192.0
+
+[node name="InvSlot21" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 128.0
+margin_right = 192.0
+margin_bottom = 192.0
+
+[node name="InvSlot22" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 192.0
+
+[node name="InvSlot23" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 128.0
+margin_right = 320.0
+margin_bottom = 192.0
+
+[node name="InvSlot24" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 128.0
+margin_right = 384.0
+margin_bottom = 192.0
+
+[node name="InvSlot25" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 128.0
+margin_right = 448.0
+margin_bottom = 192.0
+
+[node name="InvSlot26" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 128.0
+margin_right = 512.0
+margin_bottom = 192.0
+
+[node name="InvSlot27" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 128.0
+margin_right = 576.0
+margin_bottom = 192.0
+
+[node name="InvSlot28" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 192.0
+margin_right = 64.0
+margin_bottom = 256.0
+
+[node name="InvSlot29" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 192.0
+margin_right = 128.0
+margin_bottom = 256.0
+
+[node name="InvSlot30" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 192.0
+margin_right = 192.0
+margin_bottom = 256.0
+
+[node name="InvSlot31" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 256.0
+margin_bottom = 256.0
+
+[node name="InvSlot32" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 320.0
+margin_bottom = 256.0
+
+[node name="InvSlot33" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 192.0
+margin_right = 384.0
+margin_bottom = 256.0
+
+[node name="InvSlot34" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 192.0
+margin_right = 448.0
+margin_bottom = 256.0
+
+[node name="InvSlot35" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 192.0
+margin_right = 512.0
+margin_bottom = 256.0
+
+[node name="InvSlot36" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 192.0
+margin_right = 576.0
+margin_bottom = 256.0
+
+[node name="InvSlot37" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 256.0
+margin_right = 64.0
+margin_bottom = 320.0
+
+[node name="InvSlot38" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 128.0
+margin_bottom = 320.0
+
+[node name="InvSlot39" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 256.0
+margin_right = 192.0
+margin_bottom = 320.0
+
+[node name="InvSlot40" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 256.0
+margin_right = 256.0
+margin_bottom = 320.0
+
+[node name="InvSlot41" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 256.0
+margin_right = 320.0
+margin_bottom = 320.0
+
+[node name="InvSlot42" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 256.0
+margin_right = 384.0
+margin_bottom = 320.0
+
+[node name="InvSlot43" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 256.0
+margin_right = 448.0
+margin_bottom = 320.0
+
+[node name="InvSlot44" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 256.0
+margin_right = 512.0
+margin_bottom = 320.0
+
+[node name="InvSlot45" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 256.0
+margin_right = 576.0
+margin_bottom = 320.0
+
+[node name="InvSlot46" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 320.0
+margin_right = 64.0
+margin_bottom = 384.0
+
+[node name="InvSlot47" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 320.0
+margin_right = 128.0
+margin_bottom = 384.0
+
+[node name="InvSlot48" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 320.0
+margin_right = 192.0
+margin_bottom = 384.0
+
+[node name="InvSlot49" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 320.0
+margin_right = 256.0
+margin_bottom = 384.0
+
+[node name="InvSlot50" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 320.0
+margin_right = 320.0
+margin_bottom = 384.0
+
+[node name="InvSlot51" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 320.0
+margin_right = 384.0
+margin_bottom = 384.0
+
+[node name="InvSlot52" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 320.0
+margin_right = 448.0
+margin_bottom = 384.0
+
+[node name="InvSlot53" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 320.0
+margin_right = 512.0
+margin_bottom = 384.0
+
+[node name="InvSlot54" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 320.0
+margin_right = 576.0
+margin_bottom = 384.0
+
+[node name="InvSlot55" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 384.0
+margin_right = 64.0
+margin_bottom = 448.0
+
+[node name="InvSlot56" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 384.0
+margin_right = 128.0
+margin_bottom = 448.0
+
+[node name="InvSlot57" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 384.0
+margin_right = 192.0
+margin_bottom = 448.0
+
+[node name="InvSlot58" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 384.0
+margin_right = 256.0
+margin_bottom = 448.0
+
+[node name="InvSlot59" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 384.0
+margin_right = 320.0
+margin_bottom = 448.0
+
+[node name="InvSlot60" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 384.0
+margin_right = 384.0
+margin_bottom = 448.0
+
+[node name="InvSlot61" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 384.0
+margin_right = 448.0
+margin_bottom = 448.0
+
+[node name="InvSlot62" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 384.0
+margin_right = 512.0
+margin_bottom = 448.0
+
+[node name="InvSlot63" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 384.0
+margin_right = 576.0
+margin_bottom = 448.0
+
+[node name="InvSlot64" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 448.0
+margin_right = 64.0
+margin_bottom = 512.0
+
+[node name="InvSlot65" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_top = 448.0
+margin_right = 128.0
+margin_bottom = 512.0
+
+[node name="InvSlot66" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 448.0
+margin_right = 192.0
+margin_bottom = 512.0
+
+[node name="InvSlot67" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 448.0
+margin_right = 256.0
+margin_bottom = 512.0
+
+[node name="InvSlot68" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 256.0
+margin_top = 448.0
+margin_right = 320.0
+margin_bottom = 512.0
+
+[node name="InvSlot69" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 448.0
+margin_right = 384.0
+margin_bottom = 512.0
+
+[node name="InvSlot70" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_top = 448.0
+margin_right = 448.0
+margin_bottom = 512.0
+
+[node name="InvSlot71" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 448.0
+margin_right = 512.0
+margin_bottom = 512.0
+
+[node name="InvSlot72" parent="HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 448.0
+margin_right = 576.0
+margin_bottom = 512.0
