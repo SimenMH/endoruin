@@ -6,6 +6,10 @@ var player_turn = true
 var max_health = 25
 var health = 25
 
+var dir_input = Vector2()
+var prev_dir = Vector2()
+
+
 var interactive = null
 
 func _ready():
@@ -21,7 +25,7 @@ func _process(_delta):
 	if interactive && Input.is_action_pressed('interact'):
 		interactive.on_interact()
 		return
-	if  !input_direction: return
+	if !input_direction: return
 	$TurnTimer.start()
 	
 	var target_position = parent.request_move(self, input_direction)
@@ -32,10 +36,29 @@ func _process(_delta):
 
 
 func get_input_direction():
-	return Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	)
+	var new_dir = Vector2.ZERO
+	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	var y_input = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	# If input has not changed
+	if (Vector2(x_input, y_input) == dir_input):
+		new_dir = prev_dir
+	# Else if only one or neither direction is being pressed
+	elif (x_input == 0 || y_input == 0):
+		new_dir = Vector2(x_input, y_input)
+	# Else check which key was pressed last
+	else:
+		var x_changed = x_input != dir_input.x
+		var y_changed = y_input != dir_input.y
+		
+		if x_changed:
+			new_dir = Vector2(x_input, 0)
+		elif y_changed:
+			new_dir = Vector2(0, y_input)
+	
+	dir_input = Vector2(x_input, y_input)
+	prev_dir = new_dir
+	return new_dir
 
 func move_to(target_position):
 	var move_direction = (position - target_position).normalized()
