@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/enemy/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://sprites/tilesheets/colored_transparent_packed.png" type="Texture" id=2]
+[ext_resource path="res://sprites/enemies/spider.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemy/SetEnemyVisibility.tscn" type="PackedScene" id=3]
 
 [node name="Enemy" type="Node2D" groups=["end_turn", "enemy"]]
@@ -12,8 +12,6 @@ type = 2
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
 texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 464, 80, 16, 16 )
 
 [node name="Tween" type="Tween" parent="."]
 

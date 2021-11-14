@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/tiles/interactive/Exit.gd" type="Script" id=1]
 [ext_resource path="res://scenes/tiles/SetTileVisibility.tscn" type="PackedScene" id=2]
-[ext_resource path="res://sprites/tilesheets/colored_transparent_packed.png" type="Texture" id=3]
+[ext_resource path="res://sprites/tiles/stairs_down.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -17,7 +17,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
-region_enabled = true
 region_rect = Rect2( 48, 96, 16, 16 )
 
 [node name="SetTileVisibility" parent="." instance=ExtResource( 2 )]
