@@ -1,14 +1,12 @@
 extends Pawn
 
+onready var stats = PlayerData.stats
 onready var parent = get_parent()
+onready var inventory = $CanvasLayer/GUI/Inventory
 
-var player_turn = true
-
+var is_active = true
 var dir_input = Vector2()
 var prev_dir = Vector2()
-
-onready var stats = PlayerData.stats
-
 var interactive = null
 
 func _ready():
@@ -16,26 +14,32 @@ func _ready():
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
 func _process(_delta):
-	if Input.is_action_just_pressed('open_inventory'):
-		$CanvasLayer/GUI/Inventory.visible = !$CanvasLayer/GUI/Inventory.visible
-	var input_direction = get_input_direction()
-	if !$TurnTimer.is_stopped(): return
-	if Input.is_action_pressed('wait'):
-		parent.next_turn()
-		$TurnTimer.start()
-		return
-	if interactive && Input.is_action_pressed('interact'):
-		interactive.on_interact()
-		return
-	if !input_direction: return
+	get_player_input()
+
+func end_turn():
 	$TurnTimer.start()
-	
-	var target_position = parent.request_move(self, input_direction)
-	if target_position:
-		move_to(target_position)
-		position = target_position
 	parent.next_turn()
 
+func get_player_input():
+	if Input.is_action_just_pressed('open_inventory'):
+		inventory.visible = !inventory.visible
+		is_active = !inventory.visible
+	
+	if $TurnTimer.is_stopped() && is_active:
+		get_player_action()
+
+func get_player_action():
+	var input_direction = get_input_direction()
+	if Input.is_action_pressed('wait'):
+		end_turn()
+	elif interactive && Input.is_action_pressed('interact'):
+		interactive.on_interact()
+		end_turn()
+	elif input_direction:
+		var target_position = parent.request_move(self, input_direction)
+		if target_position:
+			move_to(target_position)
+		end_turn()
 
 func get_input_direction():
 	var new_dir = Vector2.ZERO
@@ -63,6 +67,7 @@ func get_input_direction():
 	return new_dir
 
 func move_to(target_position):
+	position = target_position
 	var move_direction = (position - target_position).normalized()
 	$Pivot.position = move_direction * 16
 	$Tween.interpolate_property($Pivot, "position", null, Vector2(), 0.125, Tween.TRANS_LINEAR)
@@ -75,7 +80,6 @@ func bump(dir):
 func take_damage(value):
 	stats.health -= value
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
-
 
 func _on_Interact_area_entered(area):
 	interactive = area
