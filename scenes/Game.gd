@@ -43,10 +43,6 @@ func render_level(level):
 	gridmap = gridmap_scene.instance()
 	$Navigation2D.add_child(tilemap)
 	$Navigation2D.add_child(gridmap)
-	
-	# Must yield or not all children will have been freed yet
-	# TODO: Try instancing a new grid and tilemap instead and removing the old instances
-#	yield(get_tree().create_timer(0.1), "timeout")
 
 	# Spawn Player
 	var spawn = level.spawns.get_used_cells_by_id(level.CellType.SPAWN)[0]
