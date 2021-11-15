@@ -19,7 +19,7 @@ func _ready():
 	update_inventory()
 	update_equipment()
 
-func _process(delta):
+func _process(_delta):
 	if visible:
 		get_nav_input()
 	# Testing
@@ -28,7 +28,7 @@ func _process(delta):
 		update_inventory()
 
 func initialize_inventory():
-	for i in range(inventory_space):
+	for _i in range(inventory_space):
 		inventory.append(null)
 
 func update_inventory():

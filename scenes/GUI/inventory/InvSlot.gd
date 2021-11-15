@@ -11,7 +11,7 @@ func update_item(new_item):
 	else:
 		$ItemIcon.texture = null
 
-func _process(delta):
+func _process(_delta):
 	if selected:
 		$SelectedInvSlot.visible = true
 	else:
