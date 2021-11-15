@@ -21,7 +21,6 @@ func request_move(pawn, direction):
 		set_cellv(cell_target, pawn.type)
 		set_cellv(cell_start, -1)
 		return map_to_world(cell_target) + cell_size / 2
-	
 	match pawn.type:
 		CellType.PLAYER:
 			player_action(pawn, direction, cell_tile_id, cell_target)

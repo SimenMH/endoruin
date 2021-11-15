@@ -20,22 +20,23 @@ func take_damage(value):
 		queue_free()
 
 func _on_end_turn():
-	var move_direction = pathfind()
-	
-	if move_direction:
-		var target_position = parent.request_move(self, move_direction)
-		if target_position:
-			move_to(target_position)
-			position = target_position
-	elif randf() <= activity_level:
-		var directions = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
-		directions.shuffle()
-		for dir in directions:
-			var target_position = parent.request_move(self, dir)
+	if health != 0:
+		var move_direction = pathfind()
+
+		if move_direction:
+			var target_position = parent.request_move(self, move_direction)
 			if target_position:
 				move_to(target_position)
 				position = target_position
-				break
+		elif randf() <= activity_level:
+			var directions = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+			directions.shuffle()
+			for dir in directions:
+				var target_position = parent.request_move(self, dir)
+				if target_position:
+					move_to(target_position)
+					position = target_position
+					break
 
 func move_to(target_position):
 	var move_direction = (position - target_position).normalized()
@@ -60,6 +61,8 @@ func pathfind():
 			var direction = (path[step] - global_position).normalized()
 			step += 1
 			return direction
+	else:
+		player = get_tree().get_root().find_node('Player', true, false)
 
 func update_visibility(cur_visible):
 	if cur_visible:
