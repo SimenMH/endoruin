@@ -12,6 +12,7 @@ var stats = {
 	'experience': 0
 }
 var inventory = []
+var inventory_space = 0
 var equipment = {
 	'head': null,
 	'neck': null,
