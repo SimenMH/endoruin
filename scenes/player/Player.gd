@@ -3,16 +3,17 @@ extends Pawn
 onready var parent = get_parent()
 
 var player_turn = true
-var max_health = 25
-var health = max_health
 
 var dir_input = Vector2()
 var prev_dir = Vector2()
 
+onready var stats = PlayerData.stats
+
 var interactive = null
 
 func _ready():
-	$CanvasLayer/GUI/Health.text = 'Health: ' + str(health) + '/' + str(max_health)
+	GameData.player_node = self
+	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
 func _process(_delta):
 	if Input.is_action_just_pressed('open_inventory'):
@@ -72,8 +73,8 @@ func bump(dir):
 	$Tween.start()
 
 func take_damage(value):
-	health -= value
-	$CanvasLayer/GUI/Health.text = 'Health: ' + str(health) + '/' + str(max_health)
+	stats.health -= value
+	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
 
 func _on_Interact_area_entered(area):
