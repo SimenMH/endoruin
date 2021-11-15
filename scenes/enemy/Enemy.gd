@@ -4,17 +4,14 @@ onready var parent = get_parent()
 onready var player = get_tree().get_root().find_node('Player', true, false)
 
 var health = 3
-var view_range = 64
-var activity_level = 1 # 0.1 > 1.0
+var view_range = 32
+var activity_level = 0.25 # 0.1 > 1.0
 var step = 0
 var path = []
 
 func _ready():
 	$LineOfSight.cast_to.x = view_range
 	modulate = Color(1, 1, 1, 0)
-
-#func _process(delta):
-#	visible = $SetEnemyVisibility.seen
 
 func take_damage(value):
 	health -= value
@@ -63,11 +60,6 @@ func pathfind():
 			var direction = (path[step] - global_position).normalized()
 			step += 1
 			return direction
-	else:
-		player = get_tree().get_root().find_node('Player', true, false)
-
-func update_player(new_player):
-	player = new_player
 
 func update_visibility(cur_visible):
 	if cur_visible:

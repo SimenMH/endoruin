@@ -1,8 +1,8 @@
 extends StaticBody2D
 
 onready var player = get_tree().get_root().find_node('Player', true, false)
-var corners = [Vector2(0, 0), Vector2(9, 9), Vector2(-9, 9), Vector2(9, -9), Vector2(-9, -9)]
-var player_corners = [Vector2(0, 0), Vector2(8, 8), Vector2(-8, 8), Vector2(8, -8), Vector2(-8, -8)]
+var corners = [Vector2(0, 0), Vector2(7, 7), Vector2(-7, 7), Vector2(7, -7), Vector2(-7, -7)]
+var player_corners = [Vector2(0, 0)] #, Vector2(8, 8), Vector2(-8, 8), Vector2(8, -8), Vector2(-8, -8)]
 var seen = false
 
 var max_range = 96
@@ -17,17 +17,17 @@ func check_visibility():
 			for corner in corners:
 				for player_corner in player_corners:
 					var intersect_ray = space_state.intersect_ray(global_position + corner, player.global_position + player_corner, [owner, self], collision_mask)
-					if intersect_ray:
-						if intersect_ray.collider == player:
-							if !seen:
-								owner.update_visibility(true)
-								seen = true
-							return
+					if intersect_ray && intersect_ray.collider == player:
+						if !seen:
+							owner.update_visibility(true)
+							seen = true
+						return
 		if seen:
 			owner.update_visibility(false)
 			seen = false
 		return
-
+	else:
+		player = get_tree().get_root().find_node('Player', true, false)
 
 func _on_DelayTimer_timeout():
 	check_visibility()

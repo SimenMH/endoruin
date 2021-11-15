@@ -7,6 +7,8 @@ enum CellType { PLAYER, NPC, ENEMY, INTERACTIVE, WALL }
 onready var tilemap = $Navigation2D/TileMap
 onready var gridmap = $Navigation2D/GridMap
 
+var tilemap_scene = preload('res://scenes/levels/TileMap.tscn')
+var gridmap_scene = preload('res://scenes/levels/GridMap.tscn')
 var player = preload('res://scenes/player/Player.tscn')
 var enemy = preload('res://scenes/enemy/Enemy.tscn')
 var door = preload('res://scenes/tiles/interactive/Door.tscn')
@@ -21,6 +23,10 @@ func _physics_process(_delta):
 		start_game()
 
 func start_game():
+	if tilemap:
+		tilemap.queue_free()
+	if gridmap:
+		gridmap.queue_free()
 	var generator_instance = level_generator.instance()
 	generator_instance.visible = false
 	add_child(generator_instance)
@@ -32,17 +38,15 @@ func start_game():
 	generator_instance.queue_free()
 
 func render_level(level):
-	# Clear Tilemaps
-	for child in gridmap.get_children():
-		child.queue_free()
-	for child in tilemap.get_children():
-		child.queue_free()
-	tilemap.clear()
-	gridmap.clear()
+	# Create Tilemaps
+	tilemap = tilemap_scene.instance()
+	gridmap = gridmap_scene.instance()
+	$Navigation2D.add_child(tilemap)
+	$Navigation2D.add_child(gridmap)
 	
 	# Must yield or not all children will have been freed yet
 	# TODO: Try instancing a new grid and tilemap instead and removing the old instances
-	yield(get_tree().create_timer(0.1), "timeout")
+#	yield(get_tree().create_timer(0.1), "timeout")
 
 	# Spawn Player
 	var spawn = level.spawns.get_used_cells_by_id(level.CellType.SPAWN)[0]
@@ -96,8 +100,7 @@ func render_level(level):
 	new_exit.position = gridmap.map_to_world(exit_pos) + gridmap.cell_size / 2
 	tilemap.add_child(new_exit)
 	tilemap.set_cellv(exit_pos, 11)
-
-	get_tree().call_group('enemy', 'update_player', new_player)
+	
 	get_tree().call_group('end_turn', '_on_end_turn')
 
 func get_new_path(start, end):

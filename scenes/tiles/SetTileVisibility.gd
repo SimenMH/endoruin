@@ -23,15 +23,13 @@ func check_visibility():
 			for corner in corners:
 				for player_corner in player_corners:
 					var intersect_ray = space_state.intersect_ray(global_position + corner, player.global_position + player_corner, [owner, self], collision_mask)
-					if intersect_ray:
-						if intersect_ray.collider == player:
-							seen = true
-							$Tween.interpolate_property(owner, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.25, Tween.TRANS_LINEAR)
-							$Tween.start()
-						else:
-							pass
-						# Temporary
-#						hit_pos.append({'start': corner, 'hit': intersect_ray.position})
+					if intersect_ray && intersect_ray.collider == player:
+						seen = true
+						$Tween.interpolate_property(owner, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.25, Tween.TRANS_LINEAR)
+						$Tween.start()
+						return
+					# Temporary
+#					hit_pos.append({'start': corner, 'hit': intersect_ray.position})
 	else:
 		player = get_tree().get_root().find_node('Player', true, false)
 

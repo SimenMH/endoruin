@@ -4,7 +4,7 @@ onready var parent = get_parent()
 
 var player_turn = true
 var max_health = 25
-var health = 25
+var health = max_health
 
 var dir_input = Vector2()
 var prev_dir = Vector2()
