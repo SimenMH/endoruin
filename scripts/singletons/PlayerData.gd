@@ -6,7 +6,7 @@ var stats = {
 	'max_health': 15,
 	'health': 15,
 	'max_mana': 10,
-	'mana': 15,
+	'mana': 10,
 	'armour': 0,
 	'weight': 0,
 	'experience': 0

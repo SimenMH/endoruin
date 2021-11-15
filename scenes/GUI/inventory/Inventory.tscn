@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/GUI/inventory/InvSlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts/pcsenior.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/GUI/inventory/Inventory.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 2 )
 color = Color( 0, 0, 0, 0.392157 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -244,7 +246,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InvSlot" parent="ColorRect/HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
+[node name="InvSlot1" parent="ColorRect/HBoxContainer/InventorySlots" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 64.0
