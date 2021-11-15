@@ -67,11 +67,11 @@ func get_input_direction():
 	return new_dir
 
 func move_to(target_position):
-	position = target_position
 	var move_direction = (position - target_position).normalized()
 	$Pivot.position = move_direction * 16
-	$Tween.interpolate_property($Pivot, "position", null, Vector2(), 0.125, Tween.TRANS_LINEAR)
+	$Tween.interpolate_property($Pivot, "position", null, Vector2.ZERO, 0.125, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
+	position = target_position
 
 func bump(dir):
 	$Tween.interpolate_property($Pivot, "position", dir * 2, Vector2.ZERO, 0.075, Tween.TRANS_LINEAR, Tween.EASE_IN)

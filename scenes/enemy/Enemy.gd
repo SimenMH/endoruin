@@ -41,7 +41,7 @@ func _on_end_turn():
 func move_to(target_position):
 	var move_direction = (position - target_position).normalized()
 	$Pivot.position = move_direction * 16
-	$Tween.interpolate_property($Pivot, "position", null, Vector2(), 0.125, Tween.TRANS_LINEAR)
+	$Tween.interpolate_property($Pivot, "position", null, Vector2.ZERO, 0.125, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 
 func bump(dir):
