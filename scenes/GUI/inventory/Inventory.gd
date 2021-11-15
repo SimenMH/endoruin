@@ -21,36 +21,81 @@ func _ready():
 
 func _process(delta):
 	if visible:
-		get_input()
+		get_nav_input()
 	# Testing
 	if Input.is_action_just_pressed('ui_accept'):
 		add_to_inventory({'name': 'Shortsword'})
 		update_inventory()
 
-func get_input():
+func get_nav_input():
 	var new_slot_idx
 	if Input.is_action_just_pressed('ui_up'):
-		new_slot_idx = selected_slot_idx - columns
+		# Equipment Navigation
+		if selected_slot_idx < 0:
+			if selected_slot_idx == -1:
+				new_slot_idx = - rows
+			else:
+				new_slot_idx = selected_slot_idx + 1
+		# Inventory Navigation
+		elif selected_slot_idx > 0:
+			new_slot_idx = selected_slot_idx - columns
+			if new_slot_idx < 0:
+				new_slot_idx += inventory_space - 1
+		else:
+			new_slot_idx = inventory_space - 1
 	if Input.is_action_just_pressed('ui_down'):
-		if selected_slot_idx != inventory_space -1:
+		# Equipment Navigation
+		if selected_slot_idx < 0:
+			if abs(selected_slot_idx) >= rows:
+				new_slot_idx = -1
+			else:
+				new_slot_idx = selected_slot_idx - 1
+		# Inventory Navigation
+		elif selected_slot_idx < inventory_space - 1:
 			new_slot_idx = selected_slot_idx + columns
 			if new_slot_idx >= inventory_space:
 				new_slot_idx -= inventory_space - 1
 		else:
 			new_slot_idx = 0
 	if Input.is_action_just_pressed('ui_left'):
-		new_slot_idx = selected_slot_idx - 1
+		# Equipment Navigation
+		if selected_slot_idx < 0:
+			new_slot_idx = abs(selected_slot_idx + 1) * columns + columns - 1
+		# Inventory Navigation
+		else:
+			new_slot_idx = selected_slot_idx - 1
+			if selected_slot_idx % columns == 0:
+				new_slot_idx = - int(selected_slot_idx / columns + 1)
 	if Input.is_action_just_pressed('ui_right'):
-		new_slot_idx = selected_slot_idx + 1
-	if new_slot_idx != null:
-		if new_slot_idx < 0:
-			new_slot_idx = inventory_space - 1
-		if new_slot_idx >= inventory_space:
-			new_slot_idx = 0
-		inventory_slots.get_child(selected_slot_idx).selected = false
-		inventory_slots.get_child(new_slot_idx).selected = true
-		selected_slot_idx = new_slot_idx
-	
+		# Equipment Navigation
+		if selected_slot_idx < 0:
+			new_slot_idx = abs(selected_slot_idx + 1) * columns
+		# Inventory Navigation
+		else:
+			new_slot_idx = selected_slot_idx + 1
+			if new_slot_idx % columns == 0:
+				new_slot_idx = - int(new_slot_idx / columns)
+	update_selected_slot(new_slot_idx)
+
+func update_selected_slot(idx):
+	if idx != null:
+		if selected_slot_idx < 0:
+			# Unselect Equipment Slot
+			var equipment_idx = abs(selected_slot_idx + 1)
+			var equipment_slot = equipment_slots.get_child(equipment_idx).get_child(1)
+			equipment_slot.selected = false
+		else:
+			# Unselect Inventory Slot
+			inventory_slots.get_child(selected_slot_idx).selected = false
+		if idx < 0:
+			# Select Equipment Slot
+			var equipment_idx = abs(idx + 1)
+			var equipment_slot = equipment_slots.get_child(equipment_idx).get_child(1)
+			equipment_slot.selected = true
+		else:
+			# Select Inventory Slot
+			inventory_slots.get_child(idx).selected = true
+		selected_slot_idx = idx
 
 func initialize_inventory():
 	for i in range(inventory_space):
