@@ -11,6 +11,6 @@ func update_item(new_item):
 
 func _process(delta):
 	if selected:
-		modulate = Color(0, 0.5, 0.5)
+		$SelectedInvSlot.visible = true
 	else:
-		modulate = Color(1, 1, 1)
+		$SelectedInvSlot.visible = false

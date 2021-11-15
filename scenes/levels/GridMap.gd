@@ -3,10 +3,6 @@ extends TileMap
 enum CellType { PLAYER, NPC, ENEMY, INTERACTIVE, WALL }
 const CELL_NAMES = ['Player', 'NPC', 'Enemy', 'Interactive', 'Wall']
 
-#func _ready():
-#	for child in get_children():
-#		set_cellv(world_to_map(child.position), child.type)
-
 func get_cell_pawn(cell, type = CellType.NPC):
 	for node in get_children():
 		if node.type == type && world_to_map(node.position) == cell:

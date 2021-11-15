@@ -79,22 +79,23 @@ func get_nav_input():
 
 func update_selected_slot(idx):
 	if idx != null:
+		# Unselect Equipment Slot
 		if selected_slot_idx < 0:
-			# Unselect Equipment Slot
 			var equipment_idx = abs(selected_slot_idx + 1)
 			var equipment_slot = equipment_slots.get_child(equipment_idx).get_child(1)
 			equipment_slot.selected = false
+		# Unselect Inventory Slot
 		else:
-			# Unselect Inventory Slot
 			inventory_slots.get_child(selected_slot_idx).selected = false
+		# Select Equipment Slot
 		if idx < 0:
-			# Select Equipment Slot
 			var equipment_idx = abs(idx + 1)
 			var equipment_slot = equipment_slots.get_child(equipment_idx).get_child(1)
 			equipment_slot.selected = true
+		# Select Inventory Slot
 		else:
-			# Select Inventory Slot
 			inventory_slots.get_child(idx).selected = true
+		
 		selected_slot_idx = idx
 
 func initialize_inventory():
