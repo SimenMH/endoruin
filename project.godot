@@ -24,6 +24,11 @@ config/name="Endoruin"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerData="*res://scripts/singletons/PlayerData.gd"
+GameData="*res://scripts/singletons/GameData.gd"
+
 [display]
 
 window/size/width=1280
