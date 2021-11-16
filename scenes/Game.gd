@@ -13,6 +13,7 @@ var player = preload('res://scenes/player/Player.tscn')
 var enemy = preload('res://scenes/enemies/Enemy.tscn')
 var door = preload('res://scenes/tiles/interactive/Door.tscn')
 var exit = preload('res://scenes/tiles/interactive/Exit.tscn')
+var item = preload('res://scenes/tiles/interactive/Item.tscn')
 var dungeon_wall = preload('res://scenes/tiles/terrain/DungeonWall.tscn')
 var dungeon_floor = preload('res://scenes/tiles/terrain/DungeonFloor.tscn')
 var room_wall = preload('res://scenes/tiles/terrain/RoomWall.tscn')
@@ -30,7 +31,7 @@ func start_game():
 	var generator_instance = level_generator.instance()
 	generator_instance.visible = false
 	add_child(generator_instance)
-	var new_level = generator_instance.generate(16)
+	var new_level = generator_instance.generate(28)
 	render_level(new_level)
 	
 	# TODO: Move this queue_free to bottom of render_level function
@@ -90,12 +91,18 @@ func render_level(level):
 		gridmap.add_child(new_enemy)
 		gridmap.set_cellv(tile, CellType.ENEMY)
 	
+	# Spawn Loot
+	for tile in level.spawns.get_used_cells_by_id(level.CellType.ITEM):
+		var new_item = item.instance()
+		new_item.position = tilemap.map_to_world(tile) + tilemap.cell_size / 2
+		tilemap.add_child(new_item)
+	
 	# Spawn Exit
 	var exit_pos = level.spawns.get_used_cells_by_id(level.CellType.EXIT)[0]
 	var new_exit = exit.instance()
-	new_exit.position = gridmap.map_to_world(exit_pos) + gridmap.cell_size / 2
+	new_exit.position = tilemap.map_to_world(exit_pos) + tilemap.cell_size / 2
 	tilemap.add_child(new_exit)
-	tilemap.set_cellv(exit_pos, 11)
+#	tilemap.set_cellv(exit_pos, 11)
 	
 	get_tree().call_group('end_turn', '_on_end_turn')
 

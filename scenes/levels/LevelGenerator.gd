@@ -9,15 +9,15 @@ var max_room_size = 8
 var rooms = []
 var doors = []
 
-enum CellType { ROOM_WALL, ROOM_FLOOR, DOOR, DUNGEON_WALL, DUNGEON_FLOOR, SPAWN, EXIT, ENEMY, PATHING_TILE }
+enum CellType { ROOM_WALL, ROOM_FLOOR, DOOR, DUNGEON_WALL, DUNGEON_FLOOR, SPAWN, EXIT, ENEMY, PATHING_TILE, ITEM }
 
 onready var navmap = $WalkerNav
 onready var walker = $WalkerNav/Walker
 onready var level_tilemap = $WalkerNav/GeneratedLevel
 onready var spawn_tilemap = $Spawns
 
-func _ready():
-	randomize()
+#func _ready():
+#	randomize()
 
 func _process(_delta):
 	if Input.is_action_just_pressed('ui_select'):
@@ -50,6 +50,7 @@ func generate(size):
 	
 	create_spawn_and_exit()
 	spawn_enemies()
+	spawn_items()
 	
 	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType}
 
@@ -263,8 +264,32 @@ func spawn_enemies():
 	dungeon_floor.shuffle()
 	
 	# TODO: Calculate proper enemy amount based on level size
-	var enemy_amount = min(floor(rand_range(6, 12)), dungeon_floor.size() - 1)
-	var enemy_locations = dungeon_floor.slice(0, enemy_amount - 1)
+	var enemy_amount = min(floor(rand_range(5, 10)), dungeon_floor.size() - 1)
+	var enemy_locations = dungeon_floor.slice(0, enemy_amount)
 	
 	for pos in enemy_locations:
 		spawn_tilemap.set_cellv(pos, CellType.ENEMY)
+
+func spawn_items():
+	var dungeon_floor = level_tilemap.get_used_cells_by_id(4)
+	dungeon_floor.shuffle()
+	
+	# TODO: Calculate proper item amount based on level size
+	var dungeon_item_amount = min(floor(rand_range(0, 6)), dungeon_floor.size() - 1)
+	var item_locations = dungeon_floor.slice(0, dungeon_item_amount)
+
+	# Get room floor locations
+	for room in rooms:
+		if randf() > 0.5:
+			var room_item_amount = floor(rand_range(1, 2))
+			var floor_positions = []
+			for y in range(room.end.y - room.position.y):
+				for x in range(room.end.x - room.position.x):
+					if y != 0 && x != 0 && y != room.size.y - 1 && x != room.size.x - 1:
+						floor_positions.append(Vector2(room.position.x + x, room.position.y + y))
+			floor_positions.shuffle()
+			item_locations += floor_positions.slice(0, room_item_amount)
+	
+	for pos in item_locations:
+		if spawn_tilemap.get_cellv(pos) == -1:
+			spawn_tilemap.set_cellv(pos, CellType.ITEM)

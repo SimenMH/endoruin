@@ -22,10 +22,6 @@ func _ready():
 func _process(_delta):
 	if visible:
 		get_nav_input()
-	# Testing
-	if Input.is_action_just_pressed('ui_select'):
-		add_to_inventory({'name': 'Shortsword', 'slot': 'mhand'})
-		update_inventory()
 
 func initialize_inventory():
 	for _i in range(inventory_space):
