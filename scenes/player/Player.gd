@@ -81,6 +81,9 @@ func take_damage(value):
 	stats.health -= value
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
+func pickup_item(item):
+	return inventory.add_to_inventory(item)
+
 func _on_Interact_area_entered(area):
 	interactive = area
 

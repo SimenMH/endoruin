@@ -64,9 +64,11 @@ func add_to_inventory(item):
 	for i in range(inventory.size()):
 		if inventory[i] == null:
 			inventory[i] = item
+			update_inventory()
 			return true
 	if inventory.size() < inventory_space:
 		inventory.append(item)
+		update_inventory()
 		return true
 	else:
 		print('Inventory full!')
