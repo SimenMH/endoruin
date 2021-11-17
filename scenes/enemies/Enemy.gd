@@ -3,12 +3,13 @@ extends Pawn
 onready var parent = get_parent()
 onready var player = get_tree().get_root().find_node('Player', true, false)
 
-var enemy_name = ''
-var health = 3
-var damage = "1-4"
-var activity_level = 0.25 # 0.1 > 1.0
-var hostility = 0.5
-var view_range = 32
+var enemy_name = 'unknown'
+var health = 1
+var damage = "1-1"
+var activity_level = 0 # 0.0 > 1.0
+var hostile = false
+var hostility_level = 0
+var view_range = 48
 var step = 0
 var path = []
 
@@ -17,17 +18,18 @@ func _ready():
 	modulate = Color(1, 1, 1, 0)
 
 func initialize_enemy(enemy):
-#	var this_enemy = GameData.data.enemies['1'][0]
 	enemy_name = enemy.name
 	health = enemy.health
 	damage = enemy.damage
 	activity_level = enemy.activity_level
-	hostility = enemy.hostility
+	hostility_level = enemy.hostility
 	
 	var res = load('res://sprites/enemies/' + enemy.name + '.png')
 	$Pivot/Sprite.texture = res
 
 func take_damage(value):
+	if !hostile:
+		hostile = true
 	health -= value
 	if health <= 0:
 		parent.clear_cell(position)
@@ -65,17 +67,23 @@ func bump(dir):
 
 func pathfind():
 	if player && is_instance_valid(player):
-		$LineOfSight.rotation = (global_position.direction_to(player.global_position)).angle()
-		if $LineOfSight.get_collider() == player:
-			path = get_tree().get_root().find_node('Game', true, false).get_new_path(global_position, player.global_position)
-			if path:
-				var direction = (path[1] - global_position).normalized()
-				step = 2
+		if hostile || randf() <= hostility_level:
+			$LineOfSight.rotation = (global_position.direction_to(player.global_position)).angle()
+			if $LineOfSight.get_collider() == player:
+				if !hostile:
+					hostile = true
+				path = get_tree().get_root().find_node('Game', true, false).get_new_path(global_position, player.global_position)
+				if path:
+					var direction = (path[1] - global_position).normalized()
+					step = 2
+					return direction
+			elif path && step < path.size():
+				var direction = (path[step] - global_position).normalized()
+				step += 1
 				return direction
-		elif path && step < path.size():
-			var direction = (path[step] - global_position).normalized()
-			step += 1
-			return direction
+			else:
+				# Remove hostile tag after x turns
+				hostile = false
 	else:
 		player = get_tree().get_root().find_node('Player', true, false)
 
