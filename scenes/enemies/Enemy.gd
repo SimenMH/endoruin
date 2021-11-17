@@ -3,9 +3,12 @@ extends Pawn
 onready var parent = get_parent()
 onready var player = get_tree().get_root().find_node('Player', true, false)
 
+var enemy_name = ''
 var health = 3
-var view_range = 32
+var damage = "1-4"
 var activity_level = 0.25 # 0.1 > 1.0
+var hostility = 0.5
+var view_range = 32
 var step = 0
 var path = []
 
@@ -13,10 +16,22 @@ func _ready():
 	$LineOfSight.cast_to.x = view_range
 	modulate = Color(1, 1, 1, 0)
 
+func initialize_enemy(enemy):
+#	var this_enemy = GameData.data.enemies['1'][0]
+	enemy_name = enemy.name
+	health = enemy.health
+	damage = enemy.damage
+	activity_level = enemy.activity_level
+	hostility = enemy.hostility
+	
+	var res = load('res://sprites/enemies/' + enemy.name + '.png')
+	$Pivot/Sprite.texture = res
+
 func take_damage(value):
 	health -= value
 	if health <= 0:
 		parent.clear_cell(position)
+		print(enemy_name)
 		queue_free()
 
 func _on_end_turn():

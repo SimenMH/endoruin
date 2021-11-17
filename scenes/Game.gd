@@ -24,6 +24,7 @@ func _physics_process(_delta):
 		start_game()
 
 func start_game():
+	GameData.level_layer += 1
 	if tilemap:
 		tilemap.queue_free()
 	if gridmap:
@@ -31,7 +32,7 @@ func start_game():
 	var generator_instance = level_generator.instance()
 	generator_instance.visible = false
 	add_child(generator_instance)
-	var new_level = generator_instance.generate(28)
+	var new_level = generator_instance.generate()
 	render_level(new_level)
 	
 	# TODO: Move this queue_free to bottom of render_level function
@@ -85,11 +86,14 @@ func render_level(level):
 		tilemap.set_cellv(tile, 11)
 	
 	# Spawn Enemies
+	var i = 0
 	for tile in level.spawns.get_used_cells_by_id(level.CellType.ENEMY):
 		var new_enemy = enemy.instance()
 		new_enemy.position = gridmap.map_to_world(tile) + gridmap.cell_size / 2
+		new_enemy.initialize_enemy(level.enemies[i])
 		gridmap.add_child(new_enemy)
 		gridmap.set_cellv(tile, CellType.ENEMY)
+		i += 1
 	
 	# Spawn Loot
 	for tile in level.spawns.get_used_cells_by_id(level.CellType.ITEM):

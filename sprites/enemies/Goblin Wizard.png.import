@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spider.png-24b263ce0b6ea75274cad0bf3412a779.stex"
+path="res://.import/Goblin Wizard.png-0a609909af423d8bf505585f90ee5aa2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemies/Spider.png"
-dest_files=[ "res://.import/Spider.png-24b263ce0b6ea75274cad0bf3412a779.stex" ]
+source_file="res://sprites/enemies/Goblin Wizard.png"
+dest_files=[ "res://.import/Goblin Wizard.png-0a609909af423d8bf505585f90ee5aa2.stex" ]
 
 [params]
 

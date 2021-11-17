@@ -29,7 +29,8 @@ func player_action(pawn, direction, cell_type, cell_target):
 			var target_pawn = get_cell_pawn(cell_target, cell_type)
 			if target_pawn:
 				if target_pawn.has_method('take_damage'):
-					target_pawn.take_damage(1)
+					var damage = calculate_damage('2-6')
+					target_pawn.take_damage(damage)
 				pawn.bump(direction)
 		CellType.INTERACTIVE:
 			var target_pawn = get_cell_pawn(cell_target, cell_type)
@@ -43,7 +44,7 @@ func enemy_action(pawn, direction, cell_type, cell_target):
 		CellType.PLAYER:
 			var target_player = get_cell_pawn(cell_target, cell_type)
 			if target_player:
-				target_player.take_damage(1)
+				target_player.take_damage(calculate_damage(pawn.damage))
 				pawn.bump(direction)
 
 func clear_cell(cell_position):
@@ -51,3 +52,8 @@ func clear_cell(cell_position):
 
 func next_turn():
 	get_tree().call_group('end_turn', '_on_end_turn')
+
+func calculate_damage(string):
+	var damage_range = string.split('-')
+	var damage = round(rand_range(int(damage_range[0]), int(damage_range[1])))
+	return damage

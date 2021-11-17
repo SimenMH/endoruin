@@ -16,18 +16,12 @@ onready var walker = $WalkerNav/Walker
 onready var level_tilemap = $WalkerNav/GeneratedLevel
 onready var spawn_tilemap = $Spawns
 
-#func _ready():
-#	randomize()
-
 func _process(_delta):
 	if Input.is_action_just_pressed('ui_select'):
-		generate(16)
-	if Input.is_action_just_pressed('ui_accept'):
-		spawn_tilemap.clear()
-		create_spawn_and_exit()
-		spawn_enemies()
+		generate()
 
-func generate(size):
+func generate():
+	var size = GameData.data.level_sizes[GameData.level_layer - 1]
 	navmap = $WalkerNav
 	walker = $WalkerNav/Walker
 	level_tilemap = $WalkerNav/GeneratedLevel
@@ -40,19 +34,19 @@ func generate(size):
 	level_tilemap.clear()
 	
 	if generate_rooms() == 'ERROR':
-		return generate(size)
-	
+		return generate()
+
 	add_nav_tiles()
 	level_tilemap.update_dirty_quadrants()
-	
+
 	if generate_pathways() == 'ERROR':
-		return generate(size)
-	
+		return generate()
+
 	create_spawn_and_exit()
-	spawn_enemies()
 	spawn_items()
+	var enemies = spawn_enemies()
 	
-	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType}
+	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType, 'enemies': enemies}
 
 func generate_sections(size):
 	level = Rect2(0, 0, size, size)
@@ -186,8 +180,7 @@ func add_nav_tiles():
 
 func generate_pathways():
 	walker.position = level_tilemap.map_to_world(doors[0]) + level_tilemap.cell_size / 2
-
-
+	
 	var i = 1
 	while (i < doors.size()):
 		var door_pos = level_tilemap.map_to_world(doors[i]) + level_tilemap.cell_size / 2
@@ -210,7 +203,6 @@ func generate_pathways():
 				i += 1
 		else:
 			return 'ERROR'
-	
 	
 	var new_point = Vector2(round(rand_range(1, level.end.x)), round(rand_range(1, level.end.y)))
 	var times_ran = 0
@@ -263,12 +255,27 @@ func spawn_enemies():
 	var dungeon_floor = level_tilemap.get_used_cells_by_id(4)
 	dungeon_floor.shuffle()
 	
+	
 	# TODO: Calculate proper enemy amount based on level size
 	var enemy_amount = min(floor(rand_range(5, 10)), dungeon_floor.size() - 1)
 	var enemy_locations = dungeon_floor.slice(0, enemy_amount)
 	
+	var enemy_pool = []
+	for i in range(GameData.level_layer):
+		var threat_level = i + 1
+		enemy_pool += GameData.data.enemies[str(threat_level)]
+	var enemies = []
+	while (enemies.size() < enemy_locations.size()):
+		enemy_pool.shuffle()
+		for enemy in enemy_pool:
+			var spawn_chance = 0.3 - ((enemy.rarity - 1) * 0.05)
+			if randf() <= spawn_chance:
+				enemies.append(enemy)
+				break
+	
 	for pos in enemy_locations:
 		spawn_tilemap.set_cellv(pos, CellType.ENEMY)
+	return enemies
 
 func spawn_items():
 	var dungeon_floor = level_tilemap.get_used_cells_by_id(4)

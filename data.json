@@ -1,0 +1,283 @@
+{
+	"weapons": {
+		"1": {
+			"id": "1",
+			"name": "Shortsword",
+			"size": "Small",
+			"damage": {
+				"0": "1-6",
+				"1": "5-9",
+				"2": "7-14",
+				"3": "12-18",
+				"4": "15-22",
+				"5": "20-27"
+			},
+			"thrown_damage": "1-2",
+			"description": "Lorem ipsum"
+		},
+		"2": {
+			"id": "2",
+			"name": "Longsowrd",
+			"size": "Medium",
+			"damage": {
+				"0": "2-6",
+				"1": "5-9",
+				"2": "7-14",
+				"3": "12-18",
+				"4": "15-22",
+				"5": "20-27"
+			},
+			"thrown_damage": "1-2",
+			"description": "Lorem ipsum"
+		}
+	},
+	"head": {
+	},
+	"neck": {
+	},
+	"chest": {
+	},
+	"feet": {
+	},
+	"rings": {
+	},
+	"skills": {
+	},
+	"abilities": {
+	},
+	"potions": {
+	},
+	"scrolls": {
+	},
+	"enemies":{
+		"1": [
+			{
+				"name": "Spider",
+				"threat": 1,
+				"rarity": 1,
+				"health": 5,
+				"damage": "1-4",
+				"activity_level": 0.5,
+				"hostility": 0.5
+			},
+			{
+				"name": "Bat",
+				"threat": 1,
+				"rarity": 1,
+				"health": 4,
+				"damage": "1-3",
+				"activity_level": 0.8,
+				"hostility": 0.45
+			},
+			{
+				"name": "Giant Spider",
+				"threat": 1,
+				"rarity": 2,
+				"health": 9,
+				"damage": "2-5",
+				"activity_level": 0.35,
+				"hostility": 0.75
+			},
+			{
+				"name": "Crab",
+				"threat": 1,
+				"rarity": 3,
+				"health": 10,
+				"damage": "1-3",
+				"activity_level": 0.4,
+				"hostility": 0.2
+			},
+			{
+				"name": "Snake",
+				"threat": 1,
+				"rarity": 2,
+				"health": 6,
+				"damage": "1-4",
+				"abilities": ["poison_attack"],
+				"activity_level": 0.8,
+				"hostility": 0.8
+			},
+			{
+				"name": "Rat",
+				"threat": 1,
+				"rarity": 1,
+				"health": 3,
+				"damage": "1-3",
+				"abilities": ["evasion"],
+				"activity_level": 1,
+				"hostility": 0.2
+			}
+		],
+		"2": [
+			{
+				"name": "Scorpion",
+				"threat": 2,
+				"rarity": 2,
+				"health": 6,
+				"damage": "2-4",
+				"abilities": ["poison_attack"],
+				"activity_level": 0.5,
+				"hostility": 0.7
+			},
+						{
+				"name": "Hornet",
+				"threat": 2,
+				"rarity": 1,
+				"health": 6,
+				"damage": "4-6",
+				"activity_level": 0.8,
+				"hostility": 0.7
+			},
+			{
+				"name": "Skeleton",
+				"threat": 2,
+				"rarity": 2,
+				"health": 7,
+				"damage": "3-6",
+				"activity_level": 0.5,
+				"hostility": 0.9
+			},
+			{
+				"name": "Zombie",
+				"threat": 2,
+				"rarity": 1,
+				"health": 8,
+				"damage": "3-6",
+				"activity_level": 0.6,
+				"hostility": 1
+			}
+		],
+		"3": [
+			{
+				"name": "Queen Spider",
+				"threat": 3,
+				"rarity": 3,
+				"health": 12,
+				"damage": "3-7",
+				"modifiers": ["poison"],
+				"activity_level": 0.5,
+				"hostility": 1
+			},
+			{
+				"name": "Ghost",
+				"threat": 3,
+				"rarity": 4,
+				"health": 9,
+				"damage": "5-8",
+				"abilities": ["evasion"],
+				"activity_level": 0.4,
+				"hostility": 0.7
+			}
+		],
+		"4": [
+			{
+				"name": "Imp",
+				"threat": 4,
+				"rarity": 5,
+				"health": 11,
+				"damage": "8-13",
+				"activity_level": 1,
+				"hostility": 1
+			}
+		],
+		"5": [],
+		"6": [{
+				"name": "Golem",
+				"threat": 6,
+				"rarity": 6,
+				"health": 24,
+				"damage": "9-18",
+				"activity_level": 0.3,
+				"hostility": 0.3
+			}
+		],
+		"7": [
+			{
+				"name": "Giant",
+				"threat": 7,
+				"rarity": 5,
+				"health": 21,
+				"damage": "8-12",
+				"activity_level": 0.7,
+				"hostility": 0.8
+			},
+			{
+				"name": "Ogre",
+				"threat": 7,
+				"rarity": 5,
+				"health": 18,
+				"damage": "4-16",
+				"activity_level": 0.4,
+				"hostility": 0.8
+			}
+		],
+		"8": [],
+		"9": [
+			{
+				"name": "Goblin",
+				"threat": 9,
+				"rarity": 3,
+				"health": 17,
+				"damage": "12-20",
+				"activity_level": 0.8,
+				"hostility": 1
+			},
+			{
+				"name": "Goblin Wizard",
+				"threat": 9,
+				"rarity": 4,
+				"health": 14,
+				"damage": "16-24",
+				"activity_level": 0.6,
+				"hostility": 1
+			}
+		],	
+		"10": [
+			{
+				"name": "Goblin Rogue",
+				"threat": 10,
+				"rarity": 5,
+				"health": 15,
+				"damage": "11-28",
+				"activity_level": 1,
+				"hostility": 1
+			}
+		],
+		"11": [],
+		"12": [
+			{
+				"name": "Orc",
+				"threat": 12,
+				"rarity": 5,
+				"health": 19,
+				"damage": "16-28",
+				"activity_level": 0.8,
+				"hostility": 1
+			}
+		],
+		"13": [
+			{
+				"name": "Orc Knight",
+				"threat": 13,
+				"rarity": 5,
+				"health": 26,
+				"damage": "21-32",
+				"activity_level": 0.6,
+				"hostility": 1
+			}
+		],
+		"14": [],
+		"15": [
+			{
+				"name": "Dragon",
+				"threat": 15,
+				"rarity": 6,
+				"health": 32,
+				"damage": "34-48",
+				"activity_level": 0.2,
+				"hostility": 1
+			}
+		]
+	},
+	"level_sizes": [16, 16, 18, 20, 22, 22, 23, 25, 26, 26, 28, 28, 30, 34, 38]
+}

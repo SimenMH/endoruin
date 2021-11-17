@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spider.png-24b263ce0b6ea75274cad0bf3412a779.stex"
+path="res://.import/Ogre.png-a00fa520c984814a0d355db9760c1fe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemies/Spider.png"
-dest_files=[ "res://.import/Spider.png-24b263ce0b6ea75274cad0bf3412a779.stex" ]
+source_file="res://sprites/enemies/Ogre.png"
+dest_files=[ "res://.import/Ogre.png-a00fa520c984814a0d355db9760c1fe6.stex" ]
 
 [params]
 
