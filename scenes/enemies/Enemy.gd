@@ -33,7 +33,6 @@ func take_damage(value):
 	health -= value
 	if health <= 0:
 		parent.clear_cell(position)
-		print(enemy_name)
 		queue_free()
 
 func _on_end_turn():

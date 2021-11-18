@@ -54,6 +54,10 @@ func next_turn():
 	get_tree().call_group('end_turn', '_on_end_turn')
 
 func calculate_damage(string):
-	var damage_range = string.split('-')
-	var damage = round(rand_range(int(damage_range[0]), int(damage_range[1])))
-	return damage
+	if randf() >= 0.5:
+		var damage_range = string.split('-')
+		var damage = round(rand_range(int(damage_range[0]), int(damage_range[1])))
+		return damage
+	else:
+		# Temporary miss
+		return 0
