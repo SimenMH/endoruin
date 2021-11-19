@@ -9,14 +9,24 @@ var dir_input = Vector2()
 var prev_dir = Vector2()
 var interactive = null
 
+var health_regen = 3
+var regen_count = 0
+
 func _ready():
 	GameData.player_node = self
-	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
 func _process(_delta):
 	get_player_input()
+	update_gui()
+
+func update_gui():
+	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
 func end_turn():
+	regen_count += 1
+	if regen_count >= health_regen:
+		stats.health = min(stats.health + 1, stats.max_health)
+		regen_count = 0
 	$TurnTimer.start()
 	parent.next_turn()
 
@@ -79,7 +89,6 @@ func bump(dir):
 
 func take_damage(value):
 	stats.health -= value
-	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
 
 func pickup_item(item):
 	return inventory.add_to_inventory(item)

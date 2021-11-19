@@ -1,7 +1,6 @@
 {
-	"weapons": {
-		"1": {
-			"id": "1",
+	"weapons": [
+		{
 			"name": "Shortsword",
 			"size": "Small",
 			"damage": {
@@ -15,8 +14,7 @@
 			"thrown_damage": "1-2",
 			"description": "Lorem ipsum"
 		},
-		"2": {
-			"id": "2",
+		{
 			"name": "Longsowrd",
 			"size": "Medium",
 			"damage": {
@@ -29,26 +27,63 @@
 			},
 			"thrown_damage": "1-2",
 			"description": "Lorem ipsum"
+		},
+		{
+			"name": "Warhammer",
+			"size": "Large",
+			"damage": {
+				"0": "2-6",
+				"1": "5-9",
+				"2": "7-14",
+				"3": "12-18",
+				"4": "15-22",
+				"5": "20-27"
+			},
+			"thrown_damage": "1-2",
+			"description": "Lorem ipsum"
 		}
+	],
+	"head": [],
+	"neck": [],
+	"chest": [
+		{
+			"name": "Cloth Robe",
+			"weight": 3,
+			"material": "Cloth",
+			"armor": 0
+		},
+		{
+			"name": "Leather Armour",
+			"weight": 7,
+			"material": "Leather",
+			"armour": 2
+		},
+		{
+			"name": "Studded Leather Armour",
+			"weight": 9,
+			"material": "Leather",
+			"armour": 2
+		},
+		{
+			"name": "Chainmail",
+			"weight": 12,
+			"material": "Iron",
+			"armour": 4
+		},
+		{
+			"name": "Plate Mail",
+			"weight": 15,
+			"material": "Iron",
+			"armour": 7
+		}
+	]
 	},
-	"head": {
-	},
-	"neck": {
-	},
-	"chest": {
-	},
-	"feet": {
-	},
-	"rings": {
-	},
-	"skills": {
-	},
-	"abilities": {
-	},
-	"potions": {
-	},
-	"scrolls": {
-	},
+	"feet": [],
+	"rings": [],
+	"skills": [],
+	"abilities": [],
+	"potions": [],
+	"scrolls": [],
 	"enemies":{
 		"1": [
 			{
