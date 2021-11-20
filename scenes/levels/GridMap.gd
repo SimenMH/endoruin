@@ -29,7 +29,10 @@ func player_action(pawn, direction, cell_type, cell_target):
 			var target_pawn = get_cell_pawn(cell_target, cell_type)
 			if target_pawn:
 				if target_pawn.has_method('take_damage'):
-					var damage = calculate_damage('2-6')
+					var weapon_damage = '1-2'
+					if PlayerData.equipment['mhand']:
+						weapon_damage = PlayerData.equipment['mhand']['damage'][0]
+					var damage = calculate_damage(weapon_damage)
 					target_pawn.take_damage(damage)
 				pawn.bump(direction)
 		CellType.INTERACTIVE:

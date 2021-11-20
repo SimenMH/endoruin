@@ -14,6 +14,7 @@ var regen_count = 0
 
 func _ready():
 	GameData.player_node = self
+	update_player_stats()
 
 func _process(_delta):
 	get_player_input()
@@ -21,6 +22,7 @@ func _process(_delta):
 
 func update_gui():
 	$CanvasLayer/GUI/Health.text = 'Health: ' + str(stats.health) + '/' + str(stats.max_health)
+	$CanvasLayer/GUI/Armour.text = str(stats.armour)
 
 func end_turn():
 	regen_count += 1
@@ -99,3 +101,11 @@ func _on_Interact_area_entered(area):
 func _on_Interact_area_exited(area):
 	if interactive == area:
 		interactive = null
+
+func update_player_stats():
+	var equipment = PlayerData.equipment
+	var armour = 0
+	for key in equipment:
+		if equipment[key] && equipment[key].has('armour'):
+			armour += equipment[key].armour
+	PlayerData.stats.armour = armour

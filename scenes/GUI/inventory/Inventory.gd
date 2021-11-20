@@ -12,6 +12,8 @@ export var grow_vertically = true
 
 var selected_slot_idx = 0
 
+signal update_player_stats
+
 func _ready():
 	inventory_slots.get_child(selected_slot_idx).selected = true
 	if inventory.size() < inventory_space:
@@ -43,6 +45,7 @@ func update_equipment():
 	for slot in slots:
 		var slot_type = slot.name.to_lower()
 		slot.get_child(1).update_item(equipment[slot_type])
+	emit_signal('update_player_stats')
 
 func get_vert_slot_idx(idx):
 	var row = idx - (idx / rows * rows)

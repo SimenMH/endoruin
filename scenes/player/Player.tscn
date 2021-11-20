@@ -39,7 +39,20 @@ margin_top = 656.0
 margin_right = -1219.0
 margin_bottom = -50.0
 rect_scale = Vector2( 3, 3 )
-text = "25/25"
+text = "Health: 25/25"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Armour" type="Label" parent="CanvasLayer/GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 321.0
+margin_top = 656.0
+margin_right = -922.0
+margin_bottom = -50.0
+rect_scale = Vector2( 3, 3 )
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -75,5 +88,6 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
 shape = SubResource( 2 )
 
+[connection signal="update_player_stats" from="CanvasLayer/GUI/Inventory" to="." method="update_player_stats"]
 [connection signal="area_entered" from="Interact" to="." method="_on_Interact_area_entered"]
 [connection signal="area_exited" from="Interact" to="." method="_on_Interact_area_exited"]

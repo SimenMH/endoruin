@@ -3,14 +3,14 @@
 		{
 			"name": "Shortsword",
 			"size": "Small",
-			"damage": {
-				"0": "1-6",
-				"1": "5-9",
-				"2": "7-14",
-				"3": "12-18",
-				"4": "15-22",
-				"5": "20-27"
-			},
+			"damage": [
+				"2-6",
+				"5-9",
+				"7-14",
+				"12-18",
+				"15-22",
+				"20-27"
+			],
 			"thrown_damage": "1-2",
 			"type": "weapon",
 			"description": "Lorem ipsum"
@@ -18,14 +18,14 @@
 		{
 			"name": "Longsword",
 			"size": "Medium",
-			"damage": {
-				"0": "2-6",
-				"1": "5-9",
-				"2": "7-14",
-				"3": "12-18",
-				"4": "15-22",
-				"5": "20-27"
-			},
+			"damage": [
+				"2-6",
+				"5-9",
+				"7-14",
+				"12-18",
+				"15-22",
+				"20-27"
+			],
 			"thrown_damage": "1-2",
 			"type": "weapon",
 			"description": "Lorem ipsum"
@@ -33,14 +33,14 @@
 		{
 			"name": "Warhammer",
 			"size": "Large",
-			"damage": {
-				"0": "2-6",
-				"1": "5-9",
-				"2": "7-14",
-				"3": "12-18",
-				"4": "15-22",
-				"5": "20-27"
-			},
+			"damage": [
+				"2-6",
+				"5-9",
+				"7-14",
+				"12-18",
+				"15-22",
+				"20-27"
+			],
 			"thrown_damage": "1-2",
 			"type": "weapon",
 			"description": "Lorem ipsum"
@@ -60,28 +60,28 @@
 			"name": "Leather Armour",
 			"weight": 7,
 			"material": "Leather",
-			"armour": 2,
+			"armour": 3,
 			"type": "chest"
 		},
 		{
 			"name": "Studded Leather Armour",
 			"weight": 9,
 			"material": "Leather",
-			"armour": 2,
+			"armour": 4,
 			"type": "chest"
 		},
 		{
 			"name": "Chainmail",
 			"weight": 12,
 			"material": "Iron",
-			"armour": 4,
+			"armour": 6,
 			"type": "chest"
 		},
 		{
 			"name": "Plate Mail",
 			"weight": 15,
 			"material": "Iron",
-			"armour": 7,
+			"armour": 9,
 			"type": "chest"
 		}
 	],
