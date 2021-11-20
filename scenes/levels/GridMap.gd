@@ -32,7 +32,7 @@ func player_action(pawn, direction, cell_type, cell_target):
 					var weapon_damage = '1-2'
 					if PlayerData.equipment['mhand']:
 						weapon_damage = PlayerData.equipment['mhand']['damage'][0]
-					var damage = calculate_damage(weapon_damage)
+					var damage = get_damage(weapon_damage)
 					target_pawn.take_damage(damage)
 				pawn.bump(direction)
 		CellType.INTERACTIVE:
@@ -47,7 +47,7 @@ func enemy_action(pawn, direction, cell_type, cell_target):
 		CellType.PLAYER:
 			var target_player = get_cell_pawn(cell_target, cell_type)
 			if target_player:
-				target_player.take_damage(calculate_damage(pawn.damage))
+				target_player.take_damage(get_damage(pawn.damage))
 				pawn.bump(direction)
 
 func clear_cell(cell_position):
@@ -56,8 +56,8 @@ func clear_cell(cell_position):
 func next_turn():
 	get_tree().call_group('end_turn', '_on_end_turn')
 
-func calculate_damage(string):
-	if randf() >= 0.5:
+func get_damage(string):
+	if randf() >= 0.5: 
 		var damage_range = string.split('-')
 		var damage = round(rand_range(int(damage_range[0]), int(damage_range[1])))
 		return damage

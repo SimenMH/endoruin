@@ -90,7 +90,13 @@ func bump(dir):
 	$Tween.start()
 
 func take_damage(value):
-	stats.health -= value
+	if value != 0:
+		var damage_reduction = 1 - (stats.armour / (stats.armour + 20))
+		var damage = round(value * damage_reduction)
+		if damage == 0:
+			print('Attack grazed')
+		else:
+			stats.health -= damage
 
 func pickup_item(item):
 	return inventory.add_to_inventory(item)
