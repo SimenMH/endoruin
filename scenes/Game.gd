@@ -96,10 +96,13 @@ func render_level(level):
 		i += 1
 	
 	# Spawn Loot
+	i = 0
 	for tile in level.spawns.get_used_cells_by_id(level.CellType.ITEM):
 		var new_item = item.instance()
 		new_item.position = tilemap.map_to_world(tile) + tilemap.cell_size / 2
+		new_item.initialize_item(level.items[i])
 		tilemap.add_child(new_item)
+		i += 1
 	
 	# Spawn Exit
 	var exit_pos = level.spawns.get_used_cells_by_id(level.CellType.EXIT)[0]

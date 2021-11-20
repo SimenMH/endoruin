@@ -153,9 +153,13 @@ func equip_item(inv_idx):
 	if grow_vertically:
 		inv_idx = get_vert_inv_idx(inv_idx)
 	var item = inventory[inv_idx]
-	if item && item.has('slot'):
-		inventory[inv_idx] = equipment[item.slot]
-		equipment[item.slot] = item
+	if item && item.has('type'):
+		if item.type == 'weapon':
+			inventory[inv_idx] = equipment['mhand']
+			equipment['mhand'] = item
+		else:
+			inventory[inv_idx] = equipment[item.type]
+			equipment[item.type] = item
 	update_inventory()
 	update_equipment()
 

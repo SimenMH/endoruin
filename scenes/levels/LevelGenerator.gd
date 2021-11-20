@@ -43,10 +43,10 @@ func generate():
 		return generate()
 
 	create_spawn_and_exit()
-	spawn_items()
+	var items = spawn_items()
 	var enemies = spawn_enemies()
 	
-	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType, 'enemies': enemies}
+	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType, 'items': items, 'enemies': enemies}
 
 func generate_sections(size):
 	level = Rect2(0, 0, size, size)
@@ -284,7 +284,7 @@ func spawn_items():
 	# TODO: Calculate proper item amount based on level size
 	var dungeon_item_amount = min(floor(rand_range(0, 6)), dungeon_floor.size() - 1)
 	var item_locations = dungeon_floor.slice(0, dungeon_item_amount)
-
+	
 	# Get room floor locations
 	for room in rooms:
 		if randf() > 0.5:
@@ -297,6 +297,15 @@ func spawn_items():
 			floor_positions.shuffle()
 			item_locations += floor_positions.slice(0, room_item_amount)
 	
+	var item_pool = []
+	item_pool += GameData.data.weapons
+	item_pool += GameData.data.chest
+	var items = []
+	while (items.size() < item_locations.size()):
+		item_pool.shuffle()
+		items.append(item_pool[0])
+	
 	for pos in item_locations:
 		if spawn_tilemap.get_cellv(pos) == -1:
 			spawn_tilemap.set_cellv(pos, CellType.ITEM)
+	return items

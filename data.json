@@ -12,10 +12,11 @@
 				"5": "20-27"
 			},
 			"thrown_damage": "1-2",
+			"type": "weapon",
 			"description": "Lorem ipsum"
 		},
 		{
-			"name": "Longsowrd",
+			"name": "Longsword",
 			"size": "Medium",
 			"damage": {
 				"0": "2-6",
@@ -26,6 +27,7 @@
 				"5": "20-27"
 			},
 			"thrown_damage": "1-2",
+			"type": "weapon",
 			"description": "Lorem ipsum"
 		},
 		{
@@ -40,6 +42,7 @@
 				"5": "20-27"
 			},
 			"thrown_damage": "1-2",
+			"type": "weapon",
 			"description": "Lorem ipsum"
 		}
 	],
@@ -50,34 +53,38 @@
 			"name": "Cloth Robe",
 			"weight": 3,
 			"material": "Cloth",
-			"armor": 0
+			"armor": 0,
+			"type": "chest"
 		},
 		{
 			"name": "Leather Armour",
 			"weight": 7,
 			"material": "Leather",
-			"armour": 2
+			"armour": 2,
+			"type": "chest"
 		},
 		{
 			"name": "Studded Leather Armour",
 			"weight": 9,
 			"material": "Leather",
-			"armour": 2
+			"armour": 2,
+			"type": "chest"
 		},
 		{
 			"name": "Chainmail",
 			"weight": 12,
 			"material": "Iron",
-			"armour": 4
+			"armour": 4,
+			"type": "chest"
 		},
 		{
 			"name": "Plate Mail",
 			"weight": 15,
 			"material": "Iron",
-			"armour": 7
+			"armour": 7,
+			"type": "chest"
 		}
-	]
-	},
+	],
 	"feet": [],
 	"rings": [],
 	"skills": [],
