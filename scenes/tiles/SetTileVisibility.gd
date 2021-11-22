@@ -6,7 +6,7 @@ var player_corners = [Vector2(0, 0), Vector2(8, 8), Vector2(-8, 8), Vector2(8, -
 var hit_pos = [] # Temporary
 var seen = false
 
-var max_range = 96
+var max_range = 64
 
 func _ready():
 	owner.modulate = Color(1, 1, 1, 0)
@@ -18,7 +18,7 @@ func check_visibility():
 #	hit_pos = []
 #	update()
 	if player && is_instance_valid(player):
-		if !seen && (global_position.distance_to(player.global_position) <= 64):
+		if !seen && (global_position.distance_to(player.global_position) <= max_range):
 			var space_state = get_world_2d().direct_space_state
 			for corner in corners:
 				for player_corner in player_corners:

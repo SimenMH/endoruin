@@ -9,7 +9,7 @@ var damage = "1-1"
 var activity_level = 0 # 0.0 > 1.0
 var hostile = false
 var hostility_level = 0
-var view_range = 48
+var view_range = 32
 var step = 0
 var path = []
 
@@ -36,7 +36,7 @@ func take_damage(value):
 		queue_free()
 
 func _on_end_turn():
-	if health != 0:
+	if health > 0:
 		var move_direction = pathfind()
 
 		if move_direction:

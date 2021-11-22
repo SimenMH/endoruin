@@ -5,14 +5,14 @@ var corners = [Vector2(0, 0), Vector2(7, 7), Vector2(-7, 7), Vector2(7, -7), Vec
 var player_corners = [Vector2(0, 0)] #, Vector2(8, 8), Vector2(-8, 8), Vector2(8, -8), Vector2(-8, -8)]
 var seen = false
 
-var max_range = 96
+var max_range = 48
 
 func _on_end_turn():
 	$DelayTimer.start(0.1)
 
 func check_visibility():
 	if player && is_instance_valid(player):
-		if (global_position.distance_to(player.global_position) <= 64):
+		if (global_position.distance_to(player.global_position) <= max_range):
 			var space_state = get_world_2d().direct_space_state
 			for corner in corners:
 				for player_corner in player_corners:
