@@ -16,9 +16,24 @@ onready var walker = $WalkerNav/Walker
 onready var level_tilemap = $WalkerNav/GeneratedLevel
 onready var spawn_tilemap = $Spawns
 
+### For visualizing only ###
+var visualizing = false
+func _ready():
+	if visualizing:
+		seed(69420)
+		add_user_signal('next_step')
+
 func _process(_delta):
-	if Input.is_action_just_pressed('ui_select'):
-		generate()
+	if visualizing:
+		if Input.is_action_just_pressed('ui_select'):
+			generate()
+		if Input.is_action_just_pressed('ui_right'):
+			emit_signal('next_step');
+
+func wait_for_input():
+	if visualizing:
+		yield(self, "next_step")
+###
 
 func generate():
 	var size = GameData.data.level_sizes[GameData.level_layer - 1]
@@ -29,21 +44,28 @@ func generate():
 	level_tilemap.clear()
 	spawn_tilemap.clear()
 	draw_size(size)
-	
+	wait_for_input()
+
 	generate_sections(size)
+	wait_for_input()
+
 	level_tilemap.clear()
 	
 	if generate_rooms() == 'ERROR':
 		return generate()
+	wait_for_input()
 
 	add_nav_tiles()
 	level_tilemap.update_dirty_quadrants()
 
 	if generate_pathways() == 'ERROR':
 		return generate()
+	wait_for_input()
 
 	create_spawn_and_exit()
+	wait_for_input()
 	var items = spawn_items()
+	wait_for_input()
 	var enemies = spawn_enemies()
 	
 	return {'level': level_tilemap, 'spawns': spawn_tilemap, 'CellType': CellType, 'items': items, 'enemies': enemies}

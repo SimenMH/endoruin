@@ -201,6 +201,7 @@ position = Vector2( 24, 72 )
 
 [node name="Sprite" type="Sprite" parent="WalkerNav/Walker"]
 visible = false
+position = Vector2( -240, -144 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
