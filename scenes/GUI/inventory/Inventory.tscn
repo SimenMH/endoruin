@@ -25,16 +25,16 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="CenterContainer" parent="."]
-anchor_right = 0.9
+anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
-margin_left = 162.0
+margin_left = 112.0
 margin_top = 104.0
-margin_right = 989.0
+margin_right = 1167.0
 margin_bottom = 616.0
 custom_constants/separation = 32
 __meta__ = {
@@ -804,3 +804,10 @@ margin_left = 512.0
 margin_top = 448.0
 margin_right = 576.0
 margin_bottom = 512.0
+
+[node name="SubMenu" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+margin_left = 859.0
+margin_right = 1055.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 196, 0 )
+custom_constants/separation = 12

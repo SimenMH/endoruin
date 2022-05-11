@@ -3,6 +3,17 @@ extends TextureRect
 var selected = false
 var item = null
 
+export var label = ''
+
+func _ready():
+	$Label.text = label
+
+func _process(_delta):
+	if selected:
+		$SelectedInvSlot.visible = true
+	else:
+		$SelectedInvSlot.visible = false
+
 func update_item(new_item):
 	item = new_item
 	if new_item != null:
@@ -10,9 +21,3 @@ func update_item(new_item):
 		$ItemIcon.texture = res
 	else:
 		$ItemIcon.texture = null
-
-func _process(_delta):
-	if selected:
-		$SelectedInvSlot.visible = true
-	else:
-		$SelectedInvSlot.visible = false

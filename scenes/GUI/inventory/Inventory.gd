@@ -1,18 +1,26 @@
 extends ColorRect
 
+export var grow_vertically = true
+
 onready var inventory = PlayerData.inventory
 onready var equipment = PlayerData.equipment
 onready var inventory_slots = $ColorRect/HBoxContainer/InventorySlots
 onready var equipment_slots = $ColorRect/HBoxContainer/CenterContainer/EquipmentSlots
+onready var submenu = $ColorRect/HBoxContainer/SubMenu
 onready var inventory_space = inventory_slots.get_child_count()
 onready var columns = inventory_slots.columns
 onready var rows = inventory_space / inventory_slots.columns
 
-export var grow_vertically = true
+var submenu_option = preload('res://scenes/GUI/inventory/SubMenuOption.tscn')
 
 var selected_slot_idx = 0
 var alt_selected_slot_idx = 0
 var alt_select = false
+var submenu_options = {
+	'weapon': ['Equip Main-Hand', 'Equip Off-Hand'],
+	'equipped': ['Unequip'],
+	'default': ['Examine', 'Combine', 'Move', 'Drop']
+}
 
 enum EQUIPMENT_SLOTS { HEAD, NECK, CHEST, FEET, MHAND, OHAND, RING1, RING2 }
 
@@ -39,8 +47,9 @@ func _process(_delta):
 			update_selected_slot(selected_slot_idx, new_slot_idx)
 			selected_slot_idx = new_slot_idx
 			if Input.is_action_just_pressed('ui_accept'):
-				alt_selected_slot_idx = 0
-				alt_select = true
+				display_submenu(selected_slot_idx)
+#				alt_selected_slot_idx = 0
+#				alt_select = true
 
 func initialize_inventory():
 	for _i in range(inventory_space):
@@ -194,3 +203,17 @@ func unequip_item(equip_idx):
 			equipment[slot_type] = null
 	update_inventory()
 	update_equipment()
+
+func display_submenu(idx):
+	for child in submenu.get_children():
+		child.queue_free()
+	if idx >= 0:
+		var item = inventory[idx]
+		if !item:
+			return
+		var options = submenu_options[item.type]
+		options += submenu_options.default
+		for option in options:
+			var new_submenu_option = submenu_option.instance()
+			new_submenu_option.text = option
+			submenu.add_child(new_submenu_option)
