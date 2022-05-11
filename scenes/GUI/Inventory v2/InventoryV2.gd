@@ -23,19 +23,23 @@ var inv_slots = []
 var inv_size = [0, 0, 0] # x, y, total
 var inv_pos = Vector2(1, 0)
 
-func _physics_process(delta):
-	if Input.is_action_just_pressed('ui_left'):
-		move_in_inv(Vector2.LEFT)
-	if Input.is_action_just_pressed('ui_right'):
-		move_in_inv(Vector2.RIGHT)
-	if Input.is_action_just_pressed('ui_up'):
-		move_in_inv(Vector2.UP)
-	if Input.is_action_just_pressed('ui_down'):
-		move_in_inv(Vector2.DOWN)
-	if Input.is_action_just_pressed('ui_select'):
-		add_to_inventory2(test_item)
-	if Input.is_action_just_pressed('ui_accept'):
-		select_item()
+signal update_player_stats
+
+func _physics_process(_delta):
+	if visible:
+		if Input.is_action_just_pressed('ui_left'):
+			move_in_inv(Vector2.LEFT)
+		if Input.is_action_just_pressed('ui_right'):
+			move_in_inv(Vector2.RIGHT)
+		if Input.is_action_just_pressed('ui_up'):
+			move_in_inv(Vector2.UP)
+		if Input.is_action_just_pressed('ui_down'):
+			move_in_inv(Vector2.DOWN)
+		if Input.is_action_just_pressed('ui_select'):
+			add_to_inventory2(test_item)
+		if Input.is_action_just_pressed('ui_accept'):
+			select_item()
+
 
 func _ready():
 	get_inv_size()

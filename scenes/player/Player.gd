@@ -99,7 +99,7 @@ func take_damage(value):
 			stats.health -= damage
 
 func pickup_item(item):
-	return inventory.add_to_inventory(item)
+	return inventory.add_to_inventory2(item)
 
 func _on_Interact_area_entered(area):
 	interactive = area
