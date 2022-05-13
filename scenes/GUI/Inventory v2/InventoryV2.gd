@@ -1,49 +1,39 @@
 extends ColorRect
 
-
-var test_item = {
-	"name": "Shortsword",
-	"size": "Small",
-	"damage": [
-		"2-6",
-		"5-9",
-		"7-14",
-		"12-18",
-		"15-22",
-		"20-27"
-	],
-	"thrown_damage": "1-2",
-	"type": "weapon",
-	"description": "Lorem ipsum"
-}
-
 onready var inventory = PlayerData.inventory
 onready var equipment = PlayerData.equipment
 var inv_slots = []
 var inv_size = [0, 0, 0] # x, y, total
-var inv_pos = Vector2(1, 0)
+var select_pos = Vector2(1, 0)
+var alt_select_pos = Vector2(1, 0)
+var select_active = true
+var alt_select_active = false
+var alt_select_action = null
 
 signal update_player_stats
 
-func _physics_process(_delta):
-	if visible:
-		if Input.is_action_just_pressed('ui_left'):
+func _input(event):
+	if visible && (select_active || alt_select_active):
+		if event.is_action_pressed('ui_left'):
 			move_in_inv(Vector2.LEFT)
-		if Input.is_action_just_pressed('ui_right'):
+		if event.is_action_pressed('ui_right'):
 			move_in_inv(Vector2.RIGHT)
-		if Input.is_action_just_pressed('ui_up'):
+		if event.is_action_pressed('ui_up'):
 			move_in_inv(Vector2.UP)
-		if Input.is_action_just_pressed('ui_down'):
+		if event.is_action_pressed('ui_down'):
 			move_in_inv(Vector2.DOWN)
-		if Input.is_action_just_pressed('ui_select'):
-			add_to_inventory2(test_item)
-		if Input.is_action_just_pressed('ui_accept'):
-			select_item()
-
+		if event.is_action_pressed('ui_select'):
+			add_to_inventory2(GameData.data.weapons[0])
+		if event.is_action_pressed('ui_accept'):
+			yield(get_tree(), "idle_frame")
+			if select_active:
+				select_item()
+			elif alt_select_active:
+				alt_select_item()
 
 func _ready():
 	get_inv_size()
-	inv_slots[inv_pos.x][inv_pos.y].selected = true
+	inv_slots[select_pos.x][select_pos.y].selected = true
 	update_equipment()
 	update_inventory()
 
@@ -70,10 +60,15 @@ func get_inv_size():
 			inv_slots[i+1].append(v_node.get_child(j))
 
 func move_in_inv(dir):
-	var temp_pos = inv_pos + dir
+	var cur_pos
+	if (select_active):
+		cur_pos = select_pos
+	elif (alt_select_active):
+		cur_pos = alt_select_pos
+	var temp_pos = cur_pos + dir
 	
 	# While the temp_pos is out of range
-	while(temp_pos.x >= inv_slots.size() || temp_pos.y >= inv_slots[inv_pos.x].size() || temp_pos.x < 0 || temp_pos.y < 0):
+	while(temp_pos.x >= inv_slots.size() || temp_pos.y >= inv_slots[cur_pos.x].size() || temp_pos.x < 0 || temp_pos.y < 0):
 		# Check if at the end of the x array
 		if temp_pos.x >= inv_slots.size(): 
 			# Loop back to x pos 0
@@ -92,11 +87,15 @@ func move_in_inv(dir):
 			# Jump to end of array
 			temp_pos.y = inv_slots[temp_pos.x].size() - 1
 			temp_pos.x += dir.y
-
-	inv_slots[inv_pos.x][inv_pos.y].selected = false
+	
+	if (select_active || select_pos != temp_pos):
+		inv_slots[cur_pos.x][cur_pos.y].selected = false
 	inv_slots[temp_pos.x][temp_pos.y].selected = true
 	
-	inv_pos = temp_pos
+	if (select_active):
+		select_pos = temp_pos
+	else:
+		alt_select_pos = temp_pos
 
 
 func add_to_inventory(item):
@@ -122,31 +121,20 @@ func add_to_inventory2(item):
 		return false
 
 func select_item():
-	var selected_slot = inv_slots[inv_pos.x][inv_pos.y]
+	var selected_slot = inv_slots[select_pos.x][select_pos.y]
 	var item = selected_slot.item
 	if item != null:
-		if inv_pos.x == 0:
+		var options = []
+		if select_pos.x == 0:
 			# Equipment slot
-			select_equipped_item()
+			options.append('Unequip')
 		elif item.has('type'):
-			var inv_idx = pos_to_index(inv_pos.x, inv_pos.y)
-			if item.type == 'weapon':
-				inventory[inv_idx] = equipment['mhand']
-				equipment['mhand'] = item
-			else:
-				inventory[inv_idx] = equipment[item.type]
-				equipment[item.type] = item
-		update_equipment()
-		update_inventory()
-
-func select_equipped_item():
-	var selected_slot = inv_slots[inv_pos.x][inv_pos.y]
-	var slot_type = selected_slot.name.to_lower()
-	var cur_equipped = equipment[slot_type]
-	if (add_to_inventory2(cur_equipped)):
-		equipment[slot_type] = null
-	else:
-		print('No room in inventory to unequip item')
+			options.append('Equip')
+		options.append_array(['Examine', 'Combine', 'Move', 'Drop'])
+		var submenu = $SubMenu
+		submenu.open_submenu(options)
+		submenu.visible = true
+		select_active = false
 
 func update_equipment():
 	var equipment_slots = inv_slots[0]
@@ -168,3 +156,73 @@ func idx_to_pos(idx):
 	var x = floor(idx / inv_size[1]) + 1
 	var y = idx % inv_size[1]
 	return Vector2(x, y)
+
+func select_action(action):
+	match action:
+		'Equip':
+			start_alt_select(action, Vector2(0, 0))
+		'Unequip':
+			unequip_item()
+			select_active = true
+		'Examine':
+			select_active = true
+		'Combine':
+			select_active = true
+		'Move':
+			select_active = true
+		'Drop':
+			select_active = true
+		_:
+			pass
+
+func start_alt_select(action, initial_pos=Vector2(1,0)):
+	alt_select_pos = initial_pos
+	alt_select_active = true
+	alt_select_action = action
+	inv_slots[initial_pos.x][initial_pos.y].selected = true
+
+func alt_select_item():
+	match alt_select_action:
+		'Equip':
+			equip_item()
+		'Move':
+			pass
+		'Combine':
+			pass
+		_:
+			pass
+	alt_select_active = false
+	alt_select_action = null
+	select_active = true
+	if (alt_select_pos != select_pos):
+		inv_slots[alt_select_pos.x][alt_select_pos.y].selected = false
+
+func equip_item():
+	if (alt_select_pos.x != 0):
+		print('Select a valid slot')
+		return
+	var select_inv_idx = pos_to_index(select_pos.x, select_pos.y)
+	var selected_item = inventory[select_inv_idx]
+	
+	var slot = inv_slots[alt_select_pos.x][alt_select_pos.y].name.to_lower()
+	if selected_item.type == 'weapon' && (slot == 'mhand' || slot == 'ohand'):
+		inventory[select_inv_idx] = equipment[slot]
+		equipment[slot] = selected_item
+	elif (slot == selected_item.type):
+		inventory[select_inv_idx] = equipment[selected_item.type]
+		equipment[selected_item.type] = selected_item
+	else:
+		print('Cannot equip this item in this slot')
+	update_inventory()
+	update_equipment()
+
+
+func unequip_item():
+	var selected_slot = inv_slots[select_pos.x][select_pos.y]
+	var slot_type = selected_slot.name.to_lower()
+	var cur_equipped = equipment[slot_type]
+	if (add_to_inventory2(cur_equipped)):
+		equipment[slot_type] = null
+		update_equipment()
+	else:
+		print('No room in inventory to unequip item')

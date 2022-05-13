@@ -16,7 +16,7 @@ func _on_end_turn():
 
 func check_visibility():
 	hit_pos = []
-	update()
+#	update()
 	if player && is_instance_valid(player):
 		if !seen && (global_position.distance_to(player.global_position) <= max_range):
 			var space_state = get_world_2d().direct_space_state
@@ -29,15 +29,15 @@ func check_visibility():
 						$Tween.start()
 						return
 					# Temporary
-					hit_pos.append({'start': corner, 'hit': intersect_ray.position})
+#					hit_pos.append({'start': corner, 'hit': intersect_ray.position})
 	else:
 		player = get_tree().get_root().find_node('Player', true, false)
 
 # Temporary
-func _draw():
-	for pos in hit_pos:
-		draw_circle((pos.hit - global_position), 1, Color(1.0, .329, .298))
-		draw_line(position + pos.start, (pos.hit - global_position), Color(1.0, .329, .298))
+#func _draw():
+#	for pos in hit_pos:
+#		draw_circle((pos.hit - global_position), 1, Color(1.0, .329, .298))
+#		draw_line(position + pos.start, (pos.hit - global_position), Color(1.0, .329, .298))
 
 
 func _on_DelayTimer_timeout():
