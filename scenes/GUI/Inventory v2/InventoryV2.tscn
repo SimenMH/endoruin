@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/GUI/inventory/InvSlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/GUI/Inventory v2/InventoryV2.gd" type="Script" id=2]
+[ext_resource path="res://scenes/GUI/Inventory v2/SubMenu.gd" type="Script" id=3]
+[ext_resource path="res://scenes/GUI/Inventory v2/SubMenuOption.tscn" type="PackedScene" id=4]
 
 [node name="InventoryV2" type="ColorRect"]
 anchor_right = 1.0
@@ -641,3 +643,17 @@ anchor_bottom = 0.0
 margin_top = 448.0
 margin_right = 64.0
 margin_bottom = 512.0
+
+[node name="SubMenu" type="VBoxContainer" parent="."]
+margin_left = 992.0
+margin_top = 120.0
+margin_right = 1188.0
+margin_bottom = 616.0
+rect_min_size = Vector2( 196, 0 )
+custom_constants/separation = 6
+script = ExtResource( 3 )
+
+[node name="Label" parent="SubMenu" instance=ExtResource( 4 )]
+margin_right = 196.0
+
+[connection signal="select_action" from="SubMenu" to="." method="select_action"]
