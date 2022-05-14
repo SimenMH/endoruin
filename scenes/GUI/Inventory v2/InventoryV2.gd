@@ -30,10 +30,14 @@ func _input(event):
 				select_item()
 			elif alt_select_active:
 				alt_select_item()
+		if event.is_action_pressed('ui_cancel'):
+			if alt_select_active:
+				end_alt_select()
 
 func _ready():
 	get_inv_size()
 	inv_slots[select_pos.x][select_pos.y].selected = true
+	fill_inventory()
 	update_equipment()
 	update_inventory()
 
@@ -58,6 +62,10 @@ func get_inv_size():
 		var v_node = inv_container.get_child(i)
 		for j in range(v_node.get_child_count()):
 			inv_slots[i+1].append(v_node.get_child(j))
+
+func fill_inventory():
+	for _i in range(inv_size[2] - inventory.size()):
+		inventory.append(null)
 
 func move_in_inv(dir):
 	var cur_pos
@@ -88,7 +96,7 @@ func move_in_inv(dir):
 			temp_pos.y = inv_slots[temp_pos.x].size() - 1
 			temp_pos.x += dir.y
 	
-	if (select_active || select_pos != temp_pos):
+	if (select_active || select_pos != alt_select_pos):
 		inv_slots[cur_pos.x][cur_pos.y].selected = false
 	inv_slots[temp_pos.x][temp_pos.y].selected = true
 	
@@ -160,7 +168,11 @@ func idx_to_pos(idx):
 func select_action(action):
 	match action:
 		'Equip':
-			start_alt_select(action, Vector2(0, 0))
+			var select_inv_idx = pos_to_index(select_pos.x, select_pos.y)
+			var selected_item = inventory[select_inv_idx]
+			var slots_idx = {'head': 0, 'neck': 1, 'chest': 2, 'feet': 3, 'weapon': 4, 'ring': 6 }
+			var start_pos = Vector2(0,slots_idx[selected_item.type])
+			start_alt_select(action, start_pos)
 		'Unequip':
 			unequip_item()
 			select_active = true
@@ -169,11 +181,11 @@ func select_action(action):
 		'Combine':
 			select_active = true
 		'Move':
-			select_active = true
+			start_alt_select(action, select_pos)
 		'Drop':
 			select_active = true
 		_:
-			pass
+			select_active = true
 
 func start_alt_select(action, initial_pos=Vector2(1,0)):
 	alt_select_pos = initial_pos
@@ -181,21 +193,23 @@ func start_alt_select(action, initial_pos=Vector2(1,0)):
 	alt_select_action = action
 	inv_slots[initial_pos.x][initial_pos.y].selected = true
 
-func alt_select_item():
-	match alt_select_action:
-		'Equip':
-			equip_item()
-		'Move':
-			pass
-		'Combine':
-			pass
-		_:
-			pass
+func end_alt_select():
 	alt_select_active = false
 	alt_select_action = null
 	select_active = true
 	if (alt_select_pos != select_pos):
 		inv_slots[alt_select_pos.x][alt_select_pos.y].selected = false
+
+func alt_select_item():
+	match alt_select_action:
+		'Equip':
+			equip_item()
+		'Move':
+			move_item()
+		'Combine':
+			end_alt_select()
+		_:
+			end_alt_select()
 
 func equip_item():
 	if (alt_select_pos.x != 0):
@@ -213,8 +227,10 @@ func equip_item():
 		equipment[selected_item.type] = selected_item
 	else:
 		print('Cannot equip this item in this slot')
-	update_inventory()
+		return
 	update_equipment()
+	update_inventory()
+	end_alt_select()
 
 
 func unequip_item():
@@ -226,3 +242,21 @@ func unequip_item():
 		update_equipment()
 	else:
 		print('No room in inventory to unequip item')
+
+
+func move_item():
+	if (select_pos.x > 0 && alt_select_pos.x > 0):
+		var select_inv_idx = pos_to_index(select_pos.x, select_pos.y)
+		var alt_select_inv_idx = pos_to_index(alt_select_pos.x, alt_select_pos.y)
+		var select_item = inventory[select_inv_idx]
+		var alt_select_item = inventory[alt_select_inv_idx]
+		
+		inventory[select_inv_idx] = alt_select_item
+		inventory[alt_select_inv_idx] = select_item
+		if (select_pos != alt_select_pos):
+			inv_slots[select_pos.x][select_pos.y].selected = false
+		select_pos = alt_select_pos
+		update_inventory()
+		end_alt_select()
+	else:
+		print('Cannot move this item here')

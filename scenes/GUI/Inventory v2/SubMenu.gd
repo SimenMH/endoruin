@@ -21,6 +21,10 @@ func _process(_delta):
 			active = false
 			visible = false
 			emit_signal('select_action', options[selected_index])
+		if Input.is_action_just_released('ui_cancel'):
+			active = false
+			visible = false
+			emit_signal('select_action', 'Cancel')
 
 
 func open_submenu(new_options):
